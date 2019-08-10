@@ -66,13 +66,13 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
-    await client.get_channel(CHANNEL_ID4).send(message.author.id)     
+    await client.get_channel(CHANNEL_ID4).send(member.id)     
 
 @client.event
 async def on_message(message):
     """メッセージを処理"""
     if not message.author.bot:  # ボットのメッセージをハネる
-        await client.get_channel(CHANNEL_ID4).send(member.id)     
+        await client.get_channel(CHANNEL_ID4).send(message.author.id)     
 
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
