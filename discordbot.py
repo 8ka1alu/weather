@@ -76,12 +76,14 @@ async def on_member_join(member):
         
 @client.event
 async def on_member_join(member):
-     embed = discord.Embed(title="ユーザー情報", description=f"{message.author.mention}さん",
-                           color=0x2ECC69)
-     embed.set_thumbnail(url=message.author.avatar_url)
-     embed.add_field(name="[ID] ", value=member.id, inline=False)
-     await client.get_channel(CHANNEL_ID4).send(embed=embed)
+    if not message.author.bot:  
+         embed = discord.Embed(title="ユーザー情報", description=f"{message.author.mention}さん",
+                           　　color=0x2ECC69)
+         embed.set_thumbnail(url=message.author.avatar_url)
+         embed.add_field(name="[ID] ", value=member.id, inline=False)
+         await client.get_channel(CHANNEL_ID4).send(embed=embed)
 
+    
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
 async def loop():
