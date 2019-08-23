@@ -67,12 +67,20 @@ async def on_message(message):
 @client.event
 async def on_member_join(member):
     await client.get_channel(CHANNEL_ID4).send(member.id)     
-
+    
 #@client.event
 #async def on_message(message):
-    #"""メッセージを処理"""
-    #if not message.author.bot:  # ボットのメッセージをハネる
-        #await client.get_channel(CHANNEL_ID4).send(message.author.id)     
+    """メッセージを処理"""
+ #   if not message.author.bot:  
+  #      await client.get_channel(CHANNEL_ID4).send(message.author.id)   
+        
+@client.event
+async def on_member_join(member):
+     embed = discord.Embed(title="ユーザー情報", description=f"{message.author.mention}さん",
+                           color=0x2ECC69)
+     embed.set_thumbnail(url=message.author.avatar_url)
+     embed.add_field(name="[ID] ", value=member.id, inline=False)
+     await client.get_channel(CHANNEL_ID4).send(embed=embed)
 
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
@@ -81,10 +89,10 @@ async def loop():
     now = datetime.now().strftime('%H:%M')
     if now == '09:00':
         channel = client.get_channel(CHANNEL_ID)
-        await channel.send('マルキュマルマル！おはようございます！今日も一日頑張りましょう！')  
+        await channel.send('９：００です！おはようございます！今日も一日頑張りましょう！')  
     elif now == '23:00':
         channel = client.get_channel(CHANNEL_ID)
-        await channel.send('フタサンマルマル！おやすみなさい！以降のメンションはお控え下さい。') 
+        await channel.send('２３：００です！おやすみなさい！以降のメンションはお控え下さい。') 
 #ループ処理実行
 loop.start()
 
