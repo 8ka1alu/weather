@@ -67,7 +67,7 @@ async def on_message(message):
 @client.event
 async def on_member_join(member):
     await client.get_channel(CHANNEL_ID4).send(member.id)     
-    
+#使用注意
 @client.event
 async def on_message(message):
     if message.content == 'ログ削除':
