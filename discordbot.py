@@ -68,12 +68,15 @@ async def on_message(message):
 async def on_member_join(member):
     await client.get_channel(CHANNEL_ID4).send(member.id)     
     
-#@client.event
-#async def on_message(message):
-    """メッセージを処理"""
- #   if not message.author.bot:  
-  #      await client.get_channel(CHANNEL_ID4).send(message.author.id)   
-    
+@client.event
+async def on_message(message):
+    if message.content == 'ログ削除':
+        if message.author.guild_permissions.administrator:
+            await message.channel.purge()
+            await message.channel.send('塵一つ残らないね！')
+        else:
+            await message.channel.send('何様のつもり？')
+
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
 async def loop():
