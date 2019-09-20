@@ -11,7 +11,7 @@ TOKEN = os.environ['DISCORD_BOT_TOKEN']
 #チャンネルID
 CHANNEL_ID = 613341065365291010  #top
 CHANNEL_ID2 = 613346606347190274 #testlog
-CHANNEL_ID3 = 613346527070388245 #omikuji
+CHANNEL_ID3 = 624496341124513793 #omikuji
 CHANNEL_ID4 = 613346909154836517 #ID取得
 
 # 接続に必要なオブジェクトを生成
@@ -67,15 +67,6 @@ async def on_message(message):
 @client.event
 async def on_member_join(member):
     await client.get_channel(CHANNEL_ID4).send(member.id)     
-#使用注意
-@client.event
-async def on_message(message):
-    if message.content == 'ログ削除':
-        if message.author.guild_permissions.administrator:
-            await message.channel.purge()
-            await message.channel.send('塵一つ残らないね！')
-        else:
-            await message.channel.send('何様のつもり？')
 
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
