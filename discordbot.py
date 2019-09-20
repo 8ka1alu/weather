@@ -26,7 +26,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    await client.delete_message(message)
     """メッセージを処理"""
     if message.author.bot:  # ボットのメッセージをハネる
         return
