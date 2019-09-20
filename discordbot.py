@@ -38,6 +38,7 @@ async def on_message(message):
         embed.set_thumbnail(url=message.author.avatar_url)
         embed.add_field(name="[運勢] ", value=random.choice(('大吉', '中吉', '小吉', '吉', '半吉', '末吉', '末小吉', '凶', '小凶', '半凶', '末凶', '大凶')), inline=False)
         await client.get_channel(CHANNEL_ID3).send(embed=embed)
+        await client.delete_message(message)
 
  #運勢
     if message.content == '運勢':
