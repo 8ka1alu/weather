@@ -39,31 +39,7 @@ async def on_message(message):
         embed.add_field(name="[運勢] ", value=random.choice(('大吉', '中吉', '小吉', '吉', '半吉', '末吉', '末小吉', '凶', '小凶', '半凶', '末凶', '大凶')), inline=False)
         await client.get_channel(CHANNEL_ID3).send(embed=embed)
        
- #運勢
-    if message.content == '運勢':
-        prob = random.random()
-    
-        if prob < 0.3:
-            await client.get_channel(CHANNEL_ID3).send('凶です……外出を控えることをオススメします(  ･᷄ὢ･᷅  )')
-        
-        elif prob < 0.65:
-            await client.get_channel(CHANNEL_ID3).send('吉です！何かいい事があるかもですね！')
-        
-        elif prob < 0.71:
-            await client.get_channel(CHANNEL_ID3).send('末吉……どれくらい運がいいんでしょうね？•́ω•̀)?')
-        
-        elif prob < 0.76:
-            await client.get_channel(CHANNEL_ID3).send('半吉は吉の半分、つまり運がいいのです！')
-        
-        elif prob < 0.80:
-            await client.get_channel(CHANNEL_ID3).send('小吉ですね！ちょっと優しくされるかも？')
-        
-        elif prob < 0.83:
-            await client.get_channel(CHANNEL_ID3).send('吉の中で1番当たっても微妙に感じられる……つまり末吉なのです( ´･ω･`)')
-       
-        elif prob <= 1.0:
-            await client.get_channel(CHANNEL_ID3).send('おめでとうございます！大吉ですよ！(๑>∀<๑)♥')   
-
+ 
 @client.event
 async def on_member_join(member):
     await client.get_channel(CHANNEL_ID4).send(member.id)     
