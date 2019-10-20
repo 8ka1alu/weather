@@ -68,6 +68,19 @@ async def on_message(message):
 async def on_member_join(member):
     await client.get_channel(CHANNEL_ID4).send(member.id)     
 
+@client.event
+async def on_message(message):
+ # メッセージ送信者がBotだった場合は無視する
+    if message.author.bot:
+        return
+#年月日
+    if all(s in message.content for s in['何日？']):
+        date = datetime.datetime.now()
+        await message.channel.send(f'今日は{date.year}年{date.month}月{date.day}日です！')    
+    if all(s in message.content for s in ['何時？']):
+        date = datetime.datetime.now()
+        await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
+    
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
 async def loop():
