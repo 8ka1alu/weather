@@ -39,28 +39,7 @@ async def on_message(message):
         embed.add_field(name="[運勢] ", value=random.choice(('大吉', '中吉', '小吉', '吉', '半吉', '末吉', '末小吉', '凶', '小凶', '半凶', '末凶', '大凶')), inline=False)
         await client.get_channel(CHANNEL_ID3).send(embed=embed)
      
-def eicolor(i):
-    if i == '1':
-        return(0x51b3fc)
-    elif i == '2':
-        return(0x7dd45a)
-    elif i == '3':
-        return(0xf0ed7e)
-    elif i == '4':
-        return(0xfa782c)
-    elif i == '5-':
-        return(0xb30f20)
-    elif i == '5+':
-        return(0xb30f20)
-    elif i == '6-':
-        return(0xffcdde)
-    elif i == '6+':
-        return(0xffcdde)
-    elif i == '7':
-        return(0xffff6c)
-    
-    
-    #運勢
+#運勢
     if message.content == '運勢':
         prob = random.random()
     
