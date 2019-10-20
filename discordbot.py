@@ -39,16 +39,6 @@ async def on_message(message):
         embed.add_field(name="[運勢] ", value=random.choice(('大吉', '中吉', '小吉', '吉', '半吉', '末吉', '末小吉', '凶', '小凶', '半凶', '末凶', '大凶')), inline=False)
         await client.get_channel(CHANNEL_ID3).send(embed=embed)
        
- 
-@client.event
-async def on_member_join(member):
-    await client.get_channel(CHANNEL_ID4).send(member.id)     
-
-@client.event
-async def on_message(message):
- # メッセージ送信者がBotだった場合は無視する
-    if message.author.bot:
-        return
 #年月日
     if all(s in message.content for s in['何日？']):
         date = datetime.now()
@@ -57,6 +47,11 @@ async def on_message(message):
         date = datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
     
+@client.event
+async def on_member_join(member):
+    await client.get_channel(CHANNEL_ID4).send(member.id)     
+
+
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
 async def loop():
