@@ -75,9 +75,6 @@ async def on_message(message):
     if client.user in message.mentions: # 話しかけられたかの判定
         reply = f'{message.author.mention} 呼んだ？' # 返信メッセージの作成
         await message.channel.send(reply) # 返信メッセージを送信
-
-    if message.content == '/members':
-        print(member_name)
     
 @client.event
 async def on_member_join(member):
