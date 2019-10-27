@@ -77,7 +77,7 @@ async def on_message(message):
         await message.channel.send(reply) # 返信メッセージを送信
 
     if message.content == '/members':
-        print(message.guild.members)
+        print(member.name)
     
 @client.event
 async def on_member_join(member):
