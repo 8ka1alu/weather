@@ -71,6 +71,10 @@ async def on_message(message):
     if all(s in message.content for s in ['何時？']):
         date = datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
+
+    if client.user in message.mentions: # 話しかけられたかの判定
+        reply = f'{message.author.mention} 呼んだ？' # 返信メッセージの作成
+        await message.channel.send(reply) # 返信メッセージを送信
     
 @client.event
 async def on_member_join(member):
