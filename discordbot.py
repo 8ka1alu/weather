@@ -22,7 +22,7 @@ client = discord.Client()
 async def on_ready():
     print('Hello World,リマインドbotプログラム「project-remain」、起動しました')
     channel = client.get_channel(CHANNEL_ID2)
-    await message.channel.purge()
+    await channel.purge()
     await channel.send('BOT再起動しました。')   
 
 @client.event
