@@ -78,19 +78,6 @@ async def on_message(message):
         reply = f'{message.author.mention} 呼んだ？' # 返信メッセージの作成
         await message.channel.send(reply) # 返信メッセージを送信
     
-    if message.content == "スロット":
-        kakuritu = random.randint(1, 399)
-        slot_list = ['\U00002660', '\U00002663', '\U00002665', '\U00002666', ':seven:']
-        A = random.choice(slot_list)
-        B = random.choice(slot_list)
-        C = random.choice(slot_list)
-        if int(kakuritu) == int(1):
-           await client.send_message(message.channel, "ボーナス確定！！！")
-           await asyncio.sleep(3) #3秒間待ってやる
-           await client.send_message(message.channel, ':seven:', ':seven:', ':seven:') #7だけ出るように指定
-        else:
-           await client.send_message(message.channel, "%s%s%s" % (A, B, C))
-
 @client.event
 async def on_member_join(member):
     await client.get_channel(CHANNEL_ID4).send(member.id)     
