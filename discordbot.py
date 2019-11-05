@@ -4,6 +4,7 @@ from discord.ext import tasks
 from datetime import datetime
 import random
 import re
+import asyncio
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
