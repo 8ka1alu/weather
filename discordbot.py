@@ -25,6 +25,11 @@ async def on_ready():
     channel = client.get_channel(CHANNEL_ID2)
     await channel.purge()
     await channel.send('BOT再起動しました。')   
+    asyncio.ensure_future(greeting_gm())
+
+async def greeting_gm():
+    await client.send_message(CHANNEL_ID2, 'おはよう')
+    await asyncio.sleep(10)
 
 @client.event
 async def on_message(message):
