@@ -85,11 +85,11 @@ async def on_message(message):
         B = random.choice(slot_list)
         C = random.choice(slot_list)
         if int(kakuritu) == int(1):
-           await message.channel.send(message.channel, "ボーナス確定！！！")
+           await client.send_message(message.channel, "ボーナス確定！！！")
            await asyncio.sleep(3) #3秒間待ってやる
-           await message.channel.send(message.channel, ':seven:', ':seven:', ':seven:') #7だけ出るように指定
+           await client.send_message(message.channel, ':seven:', ':seven:', ':seven:') #7だけ出るように指定
         else:
-           await message.channel.send(message.channel, "%s%s%s" % (A, B, C))
+           await client.send_message(message.channel, "%s%s%s" % (A, B, C))
 
 @client.event
 async def on_member_join(member):
