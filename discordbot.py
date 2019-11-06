@@ -24,6 +24,8 @@ async def on_ready():
     channel = client.get_channel(CHANNEL_ID2)
     await channel.purge()
     await channel.send('BOT再起動しました。')   
+    activity = discord.Activity(name='my activity', type=discord.ActivityType.watching)
+    await client.change_presence(activity=activity)
 
 @client.event
 async def on_message(message):
