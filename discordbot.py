@@ -42,7 +42,7 @@ async def on_message(message):
         await client.get_channel(CHANNEL_ID3).send(embed=embed)
 
     if message.content == 'あいさつ':
-        suji=random.choice('おはよう', 'おやすみ', 'こんにちは', 'こんばんは', 'やったせま'),
+        suji=random.choice(('おはよう', 'おやすみ', 'こんにちは', 'こんばんは', 'やったせま'))
         await message.channel.send(suji) 
  
 #運勢
