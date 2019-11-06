@@ -24,7 +24,7 @@ async def on_ready():
     channel = client.get_channel(CHANNEL_ID2)
     await channel.purge()
     await channel.send('BOT再起動しました。')   
-    await client.change_presence(activity=discord.Game(name='ギルド専属業務'))
+    await client.change_presence(activity=discord.Game(name=f"{len(bot.guilds)}))
 
 @client.event
 async def on_message(message):
