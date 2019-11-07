@@ -83,7 +83,7 @@ async def on_message(message):
 
     if client.user in message.mentions: # 話しかけられたかの判定
         hensin = random.choice(('よんだ？', 'なにー？', 'たべちゃうぞー！', 'がおー！', 'よろしくね', '！？'))
-        reply = f'{message.author.mention} さん' + hensin + '\n 私の機能が分からなかったら「ヘルプ」と打ってね☆'# 返信メッセージの作成
+        reply = f'{message.author.mention} さん' + hensin + '```\n 私の機能が分からなかったら「ヘルプ」と打ってね☆```'# 返信メッセージの作成
         await message.channel.send(reply) # 返信メッセージを送信
     
 @client.event
