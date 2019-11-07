@@ -45,8 +45,8 @@ async def on_message(message):
         suji=random.choice(('1', '2', '3', '4', '5', '6'))
         await message.channel.send(suji) 
  
-    if message.content == 'ヘルプ':
-        await message.channel.send('こんにちは \n 改行 \n *太文字* \n ~~線~~ \n ||スポイラー||') 
+    if message.content == 'テスト':
+        await message.channel.send('こんにちは \n 改行 \n *斜線* \n ~~取り消し線~~ \n ||スポイラー|| \n **太文字** \n __下線__ \n ```コードブロック```') 
 
 #運勢
     if message.content == '運勢':
