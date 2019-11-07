@@ -46,7 +46,7 @@ async def on_message(message):
         await message.channel.send(suji) 
  
     if message.content == 'ヘルプ':
-        await message.channel.send('こんにちは \n 改行') 
+        await message.channel.send('こんにちは \n 改行 \n *太文字* \n ~~線~~ \n ||スポイラー||') 
 
 #運勢
     if message.content == '運勢':
