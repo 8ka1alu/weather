@@ -43,6 +43,7 @@ async def on_message(message):
 
     if message.content == 'ダイス':
         suji=random.choice(('1', '2', '3', '4', '5', '6'))
+        await message.delete()
         await message.channel.send(suji) 
  
     if message.content == 'ヘルプ':
