@@ -88,8 +88,9 @@ async def on_message(message):
     
 @client.event
 async def on_member_join(member):
-    await client.get_channel(CHANNEL_ID4).send(member.id)     
-
+    injoin = f'{member.mention} さん！いらっしゃい！'
+    await client.get_channel(CHANNEL_ID4).send(member.id)
+    await client.get_channel(CHANNEL_ID).send(injoin)
 
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
