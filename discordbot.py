@@ -95,7 +95,7 @@ async def on_message(message):
         if message.channel.id == lot_channel_id:
             lot_result_channel = [channel for channel in client.get_all_channels() if channel.id == lot_result_channel_id][0] 
             await client.send_message(lot_result_channel, "Good afternoon")
-        else:
+        if not message.channel.id == lot_channel_id:
             await message.delete()
 
 @client.event
@@ -103,7 +103,7 @@ async def on_member_join(member):
     injoin = f'{member.mention} さん！いらっしゃい！ \n 私は <@511397857887125539> です！ \n 私について分からないことがありましたら、「ヘルプ」と打ってね☆'
     await client.get_channel(CHANNEL_ID4).send(member.id)
     await client.get_channel(CHANNEL_ID).send(injoin)
-
+                  
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
 async def loop():
