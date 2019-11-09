@@ -14,6 +14,9 @@ CHANNEL_ID2 = 613346606347190274 #testlog
 CHANNEL_ID3 = 624496341124513793 #omikuji
 CHANNEL_ID4 = 613346909154836517 #ID取得
 
+lot_channel_id = "613346606347190274" #ここにコマンドを送るチャンネルID
+lot_result_channel_id = "613346606347190274*" #ここに結果を出力するチャンネルID
+
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
@@ -86,7 +89,15 @@ async def on_message(message):
         hensin = random.choice(('よんだ？', 'なにー？', 'たべちゃうぞー！', 'がおー！', 'よろしくね', '！？'))
         reply = f'{message.author.mention} さん' + hensin + '```\n 私の機能が分からなかったら「ヘルプ」と打ってね☆```'# 返信メッセージの作成
         await message.channel.send(reply) # 返信メッセージを送信
-    
+
+    if message.content.startswith("こんにちは"): #こんにちはから始まるメッセージ
+        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
+        if message.channel.id == lot_channel_id:
+            lot_result_channel = [channel for channel in client.get_all_channels() if channel.id == lot_result_channel_id][0] 
+            await client.send_message(lot_result_channel, "Good afternoon")
+        else:
+            await message.delete()
+
 @client.event
 async def on_member_join(member):
     injoin = f'{member.mention} さん！いらっしゃい！ \n 私は <@511397857887125539> です！ \n 私について分からないことがありましたら、「ヘルプ」と打ってね☆'
