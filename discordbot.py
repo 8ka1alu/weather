@@ -93,10 +93,11 @@ async def on_message(message):
     if message.content.startswith("こんにちは"): #こんにちはから始まるメッセージ
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.channel.id == lot_channel_id:
-            lot_result_channel = [channel for channel in client.get_all_channels() if channel.id == lot_result_channel_id][0] 
-            await client.send_message(lot_result_channel, "Good afternoon")
-        if not message.channel.id == lot_channel_id:
-            await message.delete()
+            lot_result_channel = [channel for channel in client.get_all_channels() 
+            if channel.id == lot_result_channel_id][0] 
+                await client.send_message(lot_result_channel, "Good afternoon")
+            else:
+                await message.delete()
 
 @client.event
 async def on_member_join(member):
