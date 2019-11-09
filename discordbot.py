@@ -15,7 +15,7 @@ CHANNEL_ID3 = 624496341124513793 #omikuji
 CHANNEL_ID4 = 613346909154836517 #ID取得
 
 lot_channel_id = "613346606347190274" #ここにコマンドを送るチャンネルID
-lot_result_channel_id = "613346606347190274" #ここに結果を出力するチャンネルID
+lot_result_channel_id = "613346909154836517" #ここに結果を出力するチャンネルID
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -93,8 +93,7 @@ async def on_message(message):
     if message.content.startswith("こんにちは"): #こんにちはから始まるメッセージ
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.channel.id == lot_channel_id:
-            lot_result_channel = [channel for channel in client.get_all_channels() if channel.id == lot_result_channel_id][0] 
-            await client.send_message(lot_result_channel, "Good afternoon")
+            await client.get_channel(lot_result_channel_id).send('博士成功しました')
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
