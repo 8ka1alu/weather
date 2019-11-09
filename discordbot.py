@@ -14,8 +14,8 @@ CHANNEL_ID2 = 613346606347190274 #testlog
 CHANNEL_ID3 = 624496341124513793 #omikuji
 CHANNEL_ID4 = 613346909154836517 #ID取得
 
-lot_channel_id = "613346606347190274" #ここにコマンドを送るチャンネルID
-lot_result_channel_id = "613346909154836517" #ここに結果を出力するチャンネルID
+lot_channel_id = 613346606347190274 #ここにコマンドを送るチャンネルID
+lot_result_channel_id = 613346606347190274 #ここに結果を出力するチャンネルID
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
