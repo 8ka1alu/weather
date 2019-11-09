@@ -95,7 +95,7 @@ async def on_message(message):
         if message.channel.id == lot_channel_id:
             lot_result_channel = [channel for channel in client.get_all_channels() if channel.id == lot_result_channel_id][0] 
             await client.send_message(lot_result_channel, "Good afternoon")
-        else:
+        if not message.channel.id == lot_channel_id:
             await message.delete()
 
 @client.event
