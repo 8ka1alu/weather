@@ -16,9 +16,9 @@ CHANNEL_ID4 = 613346909154836517 #ID取得
 
 lot_channel_id = 643070878652825601 #ここにコマンドを送るチャンネルID
 lot_result_channel_id1 = 613346606347190274 #ここに結果を出力するチャンネルID
-lot_result_channel_id2 = 
-lot_result_channel_id3 = 
-lot_result_channel_id4 = 
+lot_result_channel_id2 = 0
+lot_result_channel_id3 = 0
+lot_result_channel_id4 = 0
 
 role0 = discord.utils.get(message.guild.roles, name='クラス申請用紙')
 role1 = discord.utils.get(message.guild.roles, name='class SAXONY')
