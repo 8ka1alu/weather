@@ -20,7 +20,7 @@ lot_result_channel_id2 = 0
 lot_result_channel_id3 = 0
 lot_result_channel_id4 = 0
 
-role0 = discord.utils.get(message.guild.roles, name='クラス申請用紙')
+role0 = discord.utils.get(message.guild.roles, name='class ticket')
 role1 = discord.utils.get(message.guild.roles, name='class SAXONY')
 role2 = discord.utils.get(message.guild.roles, name='class CRIMEAN')
 role3 = discord.utils.get(message.guild.roles, name='class RUSVIET')
