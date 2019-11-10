@@ -14,8 +14,17 @@ CHANNEL_ID2 = 613346606347190274 #testlog
 CHANNEL_ID3 = 624496341124513793 #omikuji
 CHANNEL_ID4 = 613346909154836517 #ID取得
 
-lot_channel_id = 613346606347190274 #ここにコマンドを送るチャンネルID
-lot_result_channel_id = 613346606347190274 #ここに結果を出力するチャンネルID
+lot_channel_id = 643070878652825601 #ここにコマンドを送るチャンネルID
+lot_result_channel_id1 = 613346606347190274 #ここに結果を出力するチャンネルID
+lot_result_channel_id2 = 
+lot_result_channel_id3 = 
+lot_result_channel_id4 = 
+
+role0 = discord.utils.get(message.guild.roles, name='クラス申請用紙')
+role1 = discord.utils.get(message.guild.roles, name='class SAXONY')
+role2 = discord.utils.get(message.guild.roles, name='class CRIMEAN')
+role3 = discord.utils.get(message.guild.roles, name='class RUSVIET')
+role4 = discord.utils.get(message.guild.roles, name='class NORDIC')
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -90,10 +99,11 @@ async def on_message(message):
         reply = f'{message.author.mention} さん' + hensin + '```\n 私の機能が分からなかったら「ヘルプ」と打ってね☆```'# 返信メッセージの作成
         await message.channel.send(reply) # 返信メッセージを送信
 
-    if message.content.startswith("こんにちは"): #こんにちはから始まるメッセージ
+    if message.content.startswith("赤"): #から始まるメッセージ
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.channel.id == lot_channel_id:
-            await client.get_channel(lot_result_channel_id).send('博士成功しました')
+            await message.author.add_roles(role1)
+            await message.author.remove_roles(role0)
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
