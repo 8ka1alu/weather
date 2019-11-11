@@ -90,7 +90,7 @@ async def on_message(message):
 
     if client.user in message.mentions: # 話しかけられたかの判定
         hensin = random.choice(('よんだ？', 'なにー？', 'たべちゃうぞー！', 'がおー！', 'よろしくね', '！？'))
-        reply = f'{message.author.mention} さん' + hensin + '```\n 私の機能が分からなかったら「ヘルプ」と打ってね☆```'# 返信メッセージの作成
+        reply = f'{message.author.mention} さん' + hensin + '```\n 私の機能が分からなかったら「ヘルプ」と打ってね☆```' #返信メッセージの作成
         await message.channel.send(reply) # 返信メッセージを送信
 
     if message.content.startswith("赤"): #から始まるメッセージ
@@ -102,6 +102,8 @@ async def on_message(message):
             await message.author.remove_roles(role0)
             dm = await message.author.create_dm()
             await dm.send(f"{message.author.mention}さん! \n 「class-SAXONY」に参加しました。")
+            class_vice = f'{member.mention} さんが参加しました！'
+            await client.get_channel(lot_result_channel_id1).send(class_vice)
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
@@ -114,6 +116,7 @@ async def on_message(message):
             await message.author.remove_roles(role0)
             dm = await message.author.create_dm()
             await dm.send(f"{message.author.mention}さん！ \n 「class-CRIMEAN」に参加しました。")
+            await client.get_channel(lot_result_channel_id2).send(class_vice)
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
@@ -126,6 +129,7 @@ async def on_message(message):
             await message.author.remove_roles(role0)
             dm = await message.author.create_dm()
             await dm.send(f"{message.author.mention}さん! \n 「class-RUSVIET」に参加しました。")
+            await client.get_channel(lot_result_channel_id3).send(class_vice)
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
@@ -138,6 +142,7 @@ async def on_message(message):
             await message.author.remove_roles(role0)
             dm = await message.author.create_dm()
             await dm.send(f"{message.author.mention}さん! \n 「class NORDIC」に参加しました。")
+            await client.get_channel(lot_result_channel_id4).send(class_vice)
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
