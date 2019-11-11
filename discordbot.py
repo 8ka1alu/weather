@@ -168,5 +168,4 @@ loop.start()
 client.run(TOKEN)
 
 #リリナ
-#反抗期
 #
