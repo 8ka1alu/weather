@@ -107,7 +107,7 @@ async def on_message(message):
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.channel.id == lot_channel_id:
             role2 = discord.utils.get(message.guild.roles, name='class CRIMEAN')
-            await message.author.add_roles(role1)
+            await message.author.add_roles(role2)
             role0 = discord.utils.get(message.guild.roles, name='class ticket')
             await message.author.remove_roles(role0)
         if not message.channel.id == lot_channel_id:
@@ -117,7 +117,7 @@ async def on_message(message):
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.channel.id == lot_channel_id:
             role3 = discord.utils.get(message.guild.roles, name='class RUSVIET')
-            await message.author.add_roles(role1)
+            await message.author.add_roles(role3)
             role0 = discord.utils.get(message.guild.roles, name='class ticket')
             await message.author.remove_roles(role0)
         if not message.channel.id == lot_channel_id:
@@ -127,7 +127,7 @@ async def on_message(message):
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.channel.id == lot_channel_id:
             role4 = discord.utils.get(message.guild.roles, name='class NORDIC')
-            await message.author.add_roles(role1)
+            await message.author.add_roles(role4)
             role0 = discord.utils.get(message.guild.roles, name='class ticket')
             await message.author.remove_roles(role0)
         if not message.channel.id == lot_channel_id:
