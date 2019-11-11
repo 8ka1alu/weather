@@ -15,10 +15,10 @@ CHANNEL_ID3 = 624496341124513793 #omikuji
 CHANNEL_ID4 = 613346909154836517 #ID取得
 
 lot_channel_id = 643070878652825601 #ここにコマンドを送るチャンネルID
-lot_result_channel_id1 = 613346606347190274 #ここに結果を出力するチャンネルID
-lot_result_channel_id2 = 0
-lot_result_channel_id3 = 0
-lot_result_channel_id4 = 0
+lot_result_channel_id1 = 613346390092939275 #class-saxony
+lot_result_channel_id2 = 613346614085419040 #class-crimean
+lot_result_channel_id3 = 613346718624251944 #class-rusviet
+lot_result_channel_id4 = 613346798383267841 #class-nordic
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
