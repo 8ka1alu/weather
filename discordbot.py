@@ -20,12 +20,6 @@ lot_result_channel_id2 = 0
 lot_result_channel_id3 = 0
 lot_result_channel_id4 = 0
 
-role0 = discord.utils.get(message.guild.roles, name='class ticket')
-role1 = discord.utils.get(message.guild.roles, name='class SAXONY')
-role2 = discord.utils.get(message.guild.roles, name='class CRIMEAN')
-role3 = discord.utils.get(message.guild.roles, name='class RUSVIET')
-role4 = discord.utils.get(message.guild.roles, name='class NORDIC')
-
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
@@ -102,7 +96,39 @@ async def on_message(message):
     if message.content.startswith("赤"): #から始まるメッセージ
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.channel.id == lot_channel_id:
+            role1 = discord.utils.get(message.guild.roles, name='class SAXONY')
             await message.author.add_roles(role1)
+            role0 = discord.utils.get(message.guild.roles, name='class ticket')
+            await message.author.remove_roles(role0)
+        if not message.channel.id == lot_channel_id:
+            await message.delete()
+
+    if message.content.startswith("黄"): #から始まるメッセージ
+        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
+        if message.channel.id == lot_channel_id:
+            role2 = discord.utils.get(message.guild.roles, name='class CRIMEAN')
+            await message.author.add_roles(role1)
+            role0 = discord.utils.get(message.guild.roles, name='class ticket')
+            await message.author.remove_roles(role0)
+        if not message.channel.id == lot_channel_id:
+            await message.delete()
+
+    if message.content.startswith("緑"): #から始まるメッセージ
+        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
+        if message.channel.id == lot_channel_id:
+            role3 = discord.utils.get(message.guild.roles, name='class RUSVIET')
+            await message.author.add_roles(role1)
+            role0 = discord.utils.get(message.guild.roles, name='class ticket')
+            await message.author.remove_roles(role0)
+        if not message.channel.id == lot_channel_id:
+            await message.delete()
+
+    if message.content.startswith("青"): #から始まるメッセージ
+        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
+        if message.channel.id == lot_channel_id:
+            role4 = discord.utils.get(message.guild.roles, name='class NORDIC')
+            await message.author.add_roles(role1)
+            role0 = discord.utils.get(message.guild.roles, name='class ticket')
             await message.author.remove_roles(role0)
         if not message.channel.id == lot_channel_id:
             await message.delete()
