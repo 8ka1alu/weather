@@ -100,6 +100,8 @@ async def on_message(message):
             await message.author.add_roles(role1)
             role0 = discord.utils.get(message.guild.roles, name='class ticket')
             await message.author.remove_roles(role0)
+            dm = await message.author.create_dm()
+            await dm.send(f"{message.author.mention}さん! \n 「class-SAXONY」に参加しました。")
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
@@ -110,6 +112,8 @@ async def on_message(message):
             await message.author.add_roles(role2)
             role0 = discord.utils.get(message.guild.roles, name='class ticket')
             await message.author.remove_roles(role0)
+            dm = await message.author.create_dm()
+            await dm.send(f"{message.author.mention}さん！ \n 「class-CRIMEAN」に参加しました。")
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
@@ -120,6 +124,8 @@ async def on_message(message):
             await message.author.add_roles(role3)
             role0 = discord.utils.get(message.guild.roles, name='class ticket')
             await message.author.remove_roles(role0)
+            dm = await message.author.create_dm()
+            await dm.send(f"{message.author.mention}さん! \n 「class-RUSVIET」に参加しました。")
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
@@ -130,6 +136,8 @@ async def on_message(message):
             await message.author.add_roles(role4)
             role0 = discord.utils.get(message.guild.roles, name='class ticket')
             await message.author.remove_roles(role0)
+            dm = await message.author.create_dm()
+            await dm.send(f"{message.author.mention}さん! \n 「class NORDIC」に参加しました。")
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
