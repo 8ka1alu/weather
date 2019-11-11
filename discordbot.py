@@ -102,8 +102,7 @@ async def on_message(message):
             await message.author.remove_roles(role0)
             dm = await message.author.create_dm()
             await dm.send(f"{message.author.mention}さん! \n 「class-SAXONY」に参加しました。")
-            class_vice = f'{member.mention} さんが参加しました！'
-            await client.get_channel(lot_result_channel_id1).send(class_vice)
+            await client.get_channel(lot_result_channel_id1).send(f'{member.mention} さんが参加しました！')
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
@@ -116,7 +115,7 @@ async def on_message(message):
             await message.author.remove_roles(role0)
             dm = await message.author.create_dm()
             await dm.send(f"{message.author.mention}さん！ \n 「class-CRIMEAN」に参加しました。")
-            await client.get_channel(lot_result_channel_id2).send(class_vice)
+            await client.get_channel(lot_result_channel_id2).send(f'{member.mention} さんが参加しました！')
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
@@ -129,7 +128,7 @@ async def on_message(message):
             await message.author.remove_roles(role0)
             dm = await message.author.create_dm()
             await dm.send(f"{message.author.mention}さん! \n 「class-RUSVIET」に参加しました。")
-            await client.get_channel(lot_result_channel_id3).send(class_vice)
+            await client.get_channel(lot_result_channel_id3).send(f'{member.mention} さんが参加しました！')
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
@@ -142,7 +141,7 @@ async def on_message(message):
             await message.author.remove_roles(role0)
             dm = await message.author.create_dm()
             await dm.send(f"{message.author.mention}さん! \n 「class NORDIC」に参加しました。")
-            await client.get_channel(lot_result_channel_id4).send(class_vice)
+            await client.get_channel(lot_result_channel_id4).send(f"{member.mention} さんが参加しました！")
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
