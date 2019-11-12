@@ -149,9 +149,9 @@ async def on_message(message):
 
     if message.content.startswith("おはよう"): #から始まるメッセージ
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
-        if member.id == master_owner_id:
+        if member.channel.id == master_owner_id:
             await message.channel.send('おはようございます！マスターさん！今日も一日頑張って下さい！') 
-        if not member.id == master_owner_id:
+        if not member.channel.id == master_owner_id:
             await message.channel.send(f"{message.author.mention} さん。おはようございます。") 
 
 @client.event
