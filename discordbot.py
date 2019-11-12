@@ -154,6 +154,13 @@ async def on_message(message):
         if not message.author.id == master_owner_id:
             await message.channel.send(f"{message.author.mention} さん。おはようございます。") 
 
+    if message.content.startswith("おやすみ"): #から始まるメッセージ
+        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
+        if message.author.id == master_owner_id:
+            await message.channel.send('おやすみなさい！マスターさん！今日も一日お疲れさまでした！') 
+        if not message.author.id == master_owner_id:
+            await message.channel.send(f"{message.author.mention} さん。おやすみなさい。") 
+
 @client.event
 async def on_member_join(member):
     injoin = f'{member.mention} さん！いらっしゃい！ \n 私は <@511397857887125539> です！ \n 私について分からないことがありましたら、「ヘルプ」と打ってね☆'
