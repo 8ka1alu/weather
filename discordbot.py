@@ -20,6 +20,8 @@ lot_result_channel_id2 = 613346614085419040 #class-crimean
 lot_result_channel_id3 = 613346718624251944 #class-rusviet
 lot_result_channel_id4 = 613346798383267841 #class-nordic
 
+master_owner_id = 459936557432963103
+
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
@@ -144,6 +146,13 @@ async def on_message(message):
             await client.get_channel(lot_result_channel_id4).send(f"{message.author.mention} さんが参加しました！")
         if not message.channel.id == lot_channel_id:
             await message.delete()
+
+    if message.content.startswith("おはよう"): #から始まるメッセージ
+        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
+        if message.member.id == master_owner_id:
+            await message.channel.send('おはようございます！マスターさん！今日も一日頑張って下さい！') 
+        if not message.member.id == master_owner_id:
+            await message.channel.send(f"{message.author.mention} さん。おはようございます。") 
 
 @client.event
 async def on_member_join(member):
