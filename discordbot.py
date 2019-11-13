@@ -62,7 +62,7 @@ async def on_message(message):
         prob = random.random()
     
         if prob < 0.3:
-            await client.get_channel(CHANNEL_ID3).send('凶です……外出を控えることをオススメします(  ･᷄ὢ･᷅  )')
+            await client.get_channel(CHANNEL_ID3).send('凶です……外出を控えることをオススメします')
         
         elif prob < 0.65:
             await client.get_channel(CHANNEL_ID3).send('吉です！何かいい事があるかもですね！')
