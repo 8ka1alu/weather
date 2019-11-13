@@ -20,7 +20,7 @@ lot_result_channel_id2 = 613346614085419040 #class-crimean
 lot_result_channel_id3 = 613346718624251944 #class-rusviet
 lot_result_channel_id4 = 613346798383267841 #class-nordic
 
-master_owner_id = 459936557432963103
+master_owner_id = 459936557432963103 or 436078064292855818
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
