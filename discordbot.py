@@ -41,7 +41,7 @@ async def on_message(message):
     if message.content.startswith("BOT再起動"): #から始まるメッセージ 
         await asyncio.sleep(60)
         channel = client.get_channel(CHANNEL_ID2)
-        await channel.send('60秒たちました！') 
+        await channel.send('@engineer 60秒たちました！') 
 
     if message.author.bot:  # ボットのメッセージをハネる
         return
