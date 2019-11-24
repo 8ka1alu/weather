@@ -4,6 +4,7 @@ from discord.ext import tasks
 from datetime import datetime
 import random
 import re
+import asyncio
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
@@ -37,6 +38,11 @@ async def on_ready():
 @client.event
 async def on_message(message):
     """メッセージを処理"""
+    if message.content.startswith("BOT再起動"): #から始まるメッセージ 
+        await asyncio.sleep(60)
+        channel = client.get_channel(CHANNEL_ID2)
+        await channel.send('60秒たちました！') 
+
     if message.author.bot:  # ボットのメッセージをハネる
         return
     
