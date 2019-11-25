@@ -5,6 +5,8 @@ from datetime import datetime
 import random
 import re
 import asyncio
+import sys
+from func import diceroll
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
@@ -166,6 +168,21 @@ async def on_message(message):
             await message.channel.send('おやすみなさい！マスターさん！今日も一日お疲れさまでした！') 
         if not message.author.id == master_owner_id:
             await message.channel.send(f"{message.author.mention} さん。おやすみなさい。") 
+
+    if message.content.startswith("!dice"):
+        # 入力された内容を受け取る
+        say = message.content 
+
+        # [!dice ]部分を消し、AdBのdで区切ってリスト化する
+        order = say.strip('!dice ')
+        cnt, mx = list(map(int, order.split('d'))) # さいころの個数と面数
+        dice = diceroll(cnt, mx) # 和を計算する関数(後述)
+        await message.channel.send(dice[cnt])
+        del dice[cnt]
+
+        # さいころの目の総和の内訳を表示する
+        await message.channel.send(dice)
+
 
 @client.event
 async def on_member_join(member):
