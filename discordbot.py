@@ -39,9 +39,9 @@ async def on_ready():
 async def on_message(message):
     """メッセージを処理"""
     if message.content.startswith("BOT再起動"): #から始まるメッセージ 
-        await asyncio.sleep(60)
+        await asyncio.sleep(10)
         channel = client.get_channel(CHANNEL_ID2)
-        await channel.send('@engineer 60秒たちました！') 
+        await channel.send('<@&613342519438344193> 60秒たちました！') 
 
     if message.author.bot:  # ボットのメッセージをハネる
         return
