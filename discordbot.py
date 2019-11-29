@@ -45,7 +45,7 @@ async def on_message(message):
         channel = client.get_channel(CHANNEL_ID2)
         await channel.send('<@&613342519438344193> 2時間たちました！') 
 
-    if message.content.search("23"): 
+    if message.content.startswith("23"): 
         await channel.send('2時間たちました！') 
 
     if message.author.bot:  # ボットのメッセージをハネる
