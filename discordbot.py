@@ -31,9 +31,17 @@ client = discord.Client()
 #起動メッセージ
 @client.event
 async def on_ready():
-    print('Hello World,リマインドbotプログラム「project-remain」、起動しました')
+    print(client.user.name)  # ボットの名前
+    print(client.user.id)  # ボットのID
+    print(discord.__version__)  # discord.pyのバージョン
+    print('------')
+    print('Hello World,リマインドbotプログラム「project-RRN」、起動しました')
     channel = client.get_channel(CHANNEL_ID2)
     await channel.purge()
+    await channel.send(client.user.name)  # ボットの名前
+    await channel.send(client.user.id)  # ボットのID
+    await channel.send(discord.__version__)  # discord.pyのバージョン
+    await channel.send('------')
     await channel.send('BOT再起動しました。')   
     await client.change_presence(activity=discord.Game(name='ギルド専属ナビ'))
 
