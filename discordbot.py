@@ -196,8 +196,8 @@ async def on_message(message):
 
     voice = await channel.connect(client.get_channel("652494544725868593"))
     if message.content == ("compass on"):
-        vc.play(discord.ytdlPCMAudio('https://youtu.be/mN7u3h-BZjY')
-        vc.is_playing()
+        s = await discord.ytdlPCMAudio('https://youtu.be/mN7u3h-BZjY')
+        voice_client.play(s)
 
 @client.event
 async def on_member_join(member):
