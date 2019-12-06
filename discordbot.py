@@ -194,7 +194,7 @@ async def on_message(message):
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
 
-    voice = await channel.connect(client.get_channel("652494544725868593"))
+    voice = await channel.connect()
     if message.content == ("compass on"):
         s = await discord.ytdlPCMAudio('https://youtu.be/mN7u3h-BZjY')
         voice_client.play(s)
