@@ -7,6 +7,7 @@ import re
 import asyncio
 import sys
 from func import diceroll
+import youtube_dl
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
