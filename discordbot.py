@@ -194,10 +194,10 @@ async def on_message(message):
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
 
-    voice = await client.join_voice_channel(client.get_channel("652494544725868593"))
+    voice = await channel.connect(client.get_channel("652494544725868593"))
     if message.content == ("compass on"):
-        player = await voice.create_ytdl_player('https://youtu.be/mN7u3h-BZjY')
-        player.start()
+        vc.play(discord.ytdlPCMAudio('https://youtu.be/mN7u3h-BZjY')
+        vc.is_playing()
 
 @client.event
 async def on_member_join(member):
