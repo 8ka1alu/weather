@@ -196,7 +196,7 @@ async def on_message(message):
 
     
     if message.content == ("compass on"):
-        s = await discord.ytdlPCMAudio('https://youtu.be/mN7u3h-BZjY')
+        s = await discord.FFmpegOpusAudio('https://youtu.be/mN7u3h-BZjY')
         voice_client.play(s)
 
 @client.event
