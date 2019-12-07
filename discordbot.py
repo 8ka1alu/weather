@@ -7,6 +7,7 @@ import re
 import asyncio
 import sys
 from func import diceroll
+from discord.ext import commands
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
@@ -24,6 +25,15 @@ lot_result_channel_id3 = 613346718624251944 #class-rusviet
 lot_result_channel_id4 = 613346798383267841 #class-nordic
 
 master_owner_id = 459936557432963103 or 436078064292855818
+
+client = commands.Bot(command_prefix='/')
+@client.command()  
+@commands.has_permissions(administrator=True)  
+async def set_members(ctx):  
+    for member in ctx.guild.members:  
+        if not member.bot:  
+            role = discord.utils.find(lambda r: r.name == 'class ticket', ctx.guild.roles)  
+            await member.add_roles(role)  
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -193,11 +203,6 @@ async def on_message(message):
 
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
-
-    
-    if message.content == ("compass on"):
-        s = await discord.FFmpegOpusAudio('https://youtu.be/mN7u3h-BZjY')
-        voice_client.play(s)
 
 @client.event
 async def on_member_join(member):
