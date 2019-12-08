@@ -57,12 +57,16 @@ async def on_message(message):
         await message.channel.send('2時間たちました！') 
     if message.content == '/setup 00':
         if message.author.guild_permissions.administrator:
-            role0 = discord.utils.get(message.guild.roles, name='class ticket')
-            await message.server.members.add_roles(role0) 
+            x = message.server.members
+            for member in x:
+                role0 = discord.utils.get(message.guild.roles, name='class ticket')
+                await member.add_roles(role0) 
     if message.content == '/resetup 00':
         if message.author.guild_permissions.administrator:
-            role0 = discord.utils.get(message.guild.roles, name='class ticket')
-            await message.server.members.remove_roles(role0) 
+            x = message.server.members
+            for member in x:
+                role0 = discord.utils.get(message.guild.roles, name='class ticket')
+                await member.remove_roles(role0) 
 
     if message.author.bot:  # ボットのメッセージをハネる
         return
