@@ -59,6 +59,10 @@ async def on_message(message):
         if message.author.guild_permissions.administrator:
             role0 = discord.utils.get(message.guild.roles, name='class ticket')
             await member.add_roles(role0) 
+    if message.content == '/resetup 00':
+        if message.author.guild_permissions.administrator:
+            role0 = discord.utils.get(message.guild.roles, name='class ticket')
+            await member.remove_roles(role0) 
 
     if message.author.bot:  # ボットのメッセージをハネる
         return
