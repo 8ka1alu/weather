@@ -7,7 +7,6 @@ import re
 import asyncio
 import sys
 from func import diceroll
-from discord.ext import commands
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
@@ -25,15 +24,6 @@ lot_result_channel_id3 = 613346718624251944 #class-rusviet
 lot_result_channel_id4 = 613346798383267841 #class-nordic
 
 master_owner_id = 459936557432963103 or 436078064292855818
-
-client = commands.Bot(command_prefix='/')
-@client.command()  
-@commands.has_permissions(administrator=True)  
-async def set_members(ctx):  
-    for member in ctx.guild.members:  
-        if not member.bot:  
-            role = discord.utils.find(lambda r: r.name == 'class ticket', ctx.guild.roles)  
-            await member.add_roles(role)  
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -65,6 +55,10 @@ async def on_message(message):
 
     if message.content.startswith("23"): 
         await message.channel.send('2時間たちました！') 
+    if message.content == '/setup 00':
+        if message.author.guild_permissions.administrator:
+            role0 = discord.utils.get(message.guild.roles, name='class ticket')
+            await member.add_roles(role0) 
 
     if message.author.bot:  # ボットのメッセージをハネる
         return
