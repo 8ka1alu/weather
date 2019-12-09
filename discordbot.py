@@ -51,7 +51,7 @@ async def on_message(message):
     if message.content.startswith("BOT再起動"): #から始まるメッセージ 
         await asyncio.sleep(7200)
         channel = client.get_channel(CHANNEL_ID2)
-        await channel.send('<@&613342519438344193> 2時間たちました！') 
+        await channel.send(' 2時間たちました！') 
 
     if message.content.startswith("23"): 
         await message.channel.send('2時間たちました！') 
