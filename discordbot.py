@@ -174,14 +174,14 @@ async def on_message(message):
         if not message.channel.id == lot_channel_id:
             await message.delete()
 
-    if message.content.startswith("おはよう"): #から始まるメッセージ
+    if message.content.startswith("おはよ"): #から始まるメッセージ
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.author.id == master_owner_id:
             await message.channel.send('おはようございます！マスターさん！今日も一日頑張って下さい！') 
         if not message.author.id == master_owner_id:
             await message.channel.send(f"{message.author.mention} さん。おはようございます。") 
 
-    if message.content.startswith("おやすみ"): #から始まるメッセージ
+    if message.content.startswith("おやす"): #から始まるメッセージ
         #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
         if message.author.id == master_owner_id:
             await message.channel.send('おやすみなさい！マスターさん！今日も一日お疲れさまでした！') 
