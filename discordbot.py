@@ -60,8 +60,8 @@ master_owner_id = 459936557432963103 or 436078064292855818
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
-DebugId = ''                      # コマンドなどを入力するチャンネル
-DefaultId = ''                    # 呟くチャンネル
+DebugId = '654949655947247616'                      # コマンドなどを入力するチャンネル
+DefaultId = '613346909154836517'                    # 呟くチャンネル
 StartTime = ScheduleTime(0,10,0)  # 集計開始
 EndTime = ScheduleTime(2,23,59)   # 集計おわり
 week = ['月','火','水','木','金','土','日']
