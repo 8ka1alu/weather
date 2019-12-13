@@ -227,3 +227,4 @@ client.run(TOKEN)
 
 #リリナ
 #
+#family and friend
