@@ -55,15 +55,7 @@ async def on_message(message):
 
     if message.content.startswith("23"): 
         await message.channel.send('2時間たちました！') 
-    if message.content == '/setup 00':
-        if message.author.guild_permissions.administrator:
-            role0 = discord.utils.get(message.guild.roles, name='class ticket')
-            await guild_members.add_roles(role0) 
-    if message.content == '/resetup 00':
-        if message.author.guild_permissions.administrator:
-            role0 = discord.utils.get(message.guild.roles, name='class ticket')
-            await guild_members.remove_roles(role0) 
-
+    
     if message.author.bot:  # ボットのメッセージをハネる
         return
     
@@ -108,7 +100,34 @@ async def on_message(message):
        
         elif prob <= 1.0:
             await client.get_channel(CHANNEL_ID3).send('おめでとうございます！大吉ですよ！(๑>∀<๑)♥')   
-            
+         
+    if message.content == '御神籤':
+        await message.delete()
+        await asyncio.sleep(2)
+        prob = random.random()
+    
+        if prob < 0.1:
+            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655056313637666816/20191213233945.jpg')
+        
+        elif prob < 0.65:
+            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655055945659056134/20191213233816.jpg')
+        
+        elif prob < 0.71:
+            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655055610441891840/20191213233638.jpg')
+        
+        elif prob < 0.76:
+            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054936773754890/20191213233418.jpg')
+        
+        elif prob < 0.80:
+            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054736638345238/20191213233326.jpg')
+        
+        elif prob < 0.83:
+            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054481956012046/20191213233205.jpg')
+       
+        elif prob <= 1.0:
+            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655051678499995651/20191213232052.jpg')   
+        
+   
 #年月日
     if all(s in message.content for s in['何日？']):
         date = datetime.now()
