@@ -153,6 +153,12 @@ async def on_ready():
     await channel.send('------')
     await channel.send('BOT再起動しました。')   
     await client.change_presence(activity=discord.Game(name='ギルド専属ナビ'))
+    global DebugChannel
+    global DefaultChannel
+    DebugChannel = client.get_channel(DebugId)
+    DefaultChannel = client.get_channel(DefaultId)
+    await SendMsg(DebugChannel, 'ログインしました')
+    pass
 
 @client.event
 async def on_message(message):
@@ -310,6 +316,45 @@ async def on_message(message):
 
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
+
+    if client.user == message.author:
+        return
+        contents = message.content.split(' ')
+        bot_command = str(contents[0]).lower()
+        contents = contents[1:]
+        contents = [str(content) for content in contents]
+        reply = botCommand(bot_command, contents)
+        if message.channel.name == "bot":
+            await SendMsg(message.channel, reply)
+        pass
+
+@client.event
+async def on_reaction_add(reaction, user):
+    global part
+    if reaction.message.author == client.user:
+        part += 1
+        print('part = '+ str(part))
+        await SendMsg(DefaultChannel, f'{user.mention} 参加登録しました。')
+
+
+@client.event
+async def on_reaction_remove(reaction, user):
+    global part
+    if reaction.message.author == client.user:
+        part -= 1
+        await SendMsg(DefaultChannel, f'{user.mention} 参加をキャンセルしました。')
+    pass
+
+loop = asyncio.get_event_loop()
+
+try:
+  asyncio.async(main_task())
+  asyncio.async(check_for_reminder())
+  loop.run_forever()
+except:
+  loop.run_until_complete(client.logout())
+finally:
+  loop.close()
 
 @client.event
 async def on_member_join(member):
