@@ -121,7 +121,7 @@ async def on_message(message):
         elif prob < 0.70: #小吉
             await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054736638345238/20191213233326.jpg')
         
-        elif prob < 0.85: 末吉
+        elif prob < 0.85: #末吉
             await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054481956012046/20191213233205.jpg')
        
         elif prob <= 1.0: #大吉
