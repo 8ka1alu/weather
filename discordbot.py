@@ -7,7 +7,7 @@ import re
 import asyncio
 import sys
 from func import diceroll
-from google import search
+from search import google
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
