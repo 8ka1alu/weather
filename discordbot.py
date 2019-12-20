@@ -29,6 +29,8 @@ master_owner_id = 459936557432963103 or 436078064292855818
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
+ModeFlag = 0
+
 #起動メッセージ
 @client.event
 async def on_ready():
@@ -59,6 +61,31 @@ async def on_message(message):
     
     if message.author.bot:  # ボットのメッセージをハネる
         return
+
+    # イベント入るたびに初期化はまずいのでグローバル変数で
+    global ModeFlag
+    # botの発言は無視する(無限ループ回避)
+    if message.author.bot:
+        return
+    # 一応終了するコマンドも用意しておく
+    if message.content == '!exit':
+        await message.channel.send('ﾉｼ')
+        sys.exit()
+    # google検索モード(次に何か入力されるとそれを検索)
+    if ModeFlag == 1:
+        kensaku = message.content
+        ModeFlag = 0
+        count = 0
+        # 日本語で検索した上位5件を順番に表示
+        for url in search(kensaku, lang="jp",num = 5):
+            await message.channel.send(url)
+            count += 1
+            if(count == 5):
+               break
+    # google検索モードへの切り替え
+    if message.content == '!google':
+        ModeFlag = 1
+        await message.channel.send('検索するワードをチャットで発言してね')
     
 #おみくじ
     if message.content == "おみくじ":
