@@ -7,7 +7,7 @@ import re
 import asyncio
 import sys
 from func import diceroll
-from googlesearch import search
+from google import search
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
@@ -274,3 +274,4 @@ client.run(TOKEN)
 
 #リリナ
 #family and friend
+#検索結果
