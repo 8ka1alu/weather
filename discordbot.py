@@ -77,7 +77,11 @@ async def on_message(message):
             await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
             await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
             await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
-            
+            embed = discord.Embed(title="サーバーアイコン", description=f" ",
+                              color=0x2ECC69)
+            embed.set_thumbnail(url=message.guild.icon_url)
+            await message.channel.send(embed=embed)
+
 #おみくじ
     if message.content == "おみくじ":
         # Embedを使ったメッセージ送信 と ランダムで要素を選択
