@@ -45,7 +45,8 @@ async def on_ready():
     await channel.send(f'ID:{client.user.id}')  # ボットのID
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
     await channel.send('----------------')
-    await channel.send('BOT再起動しました。')   
+    await channel.send(f'今のサーバー人数：{len(message.guild.members)}人')
+    await channel.send('状態：BOT再起動しました。')   
     await client.change_presence(activity=discord.Game(name='ギルド専属ナビ'))
 
 @client.event
@@ -231,6 +232,14 @@ async def on_message(message):
 
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
+
+    if '議題作成' in message.content:
+        if message.author.guild_permissions.administrator:
+            match = re.search(r".*タイトルは(.+)、サブタイトルは(.+)。.*", message.content)
+            if match:
+                title, subtitle = match.groups()
+                embed = discord.Embed(title=title, description=subtitle,color=discord.Color.green())
+                await message.channel.send(embed=embed)
 
 @client.event
 async def on_member_join(member):
