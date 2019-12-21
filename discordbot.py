@@ -7,6 +7,7 @@ import re
 import asyncio
 import sys
 from func import diceroll
+import traceback 
 
 #トークン
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
@@ -58,7 +59,11 @@ async def on_message(message):
         await message.channel.send('2時間たちました！') 
     
     if message.author.bot:  # ボットのメッセージをハネる
-        return   
+        return 
+    if message.content == '!restart':  
+        await client.logout()  
+        os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
+  
 #おみくじ
     if message.content == "おみくじ":
         # Embedを使ったメッセージ送信 と ランダムで要素を選択
