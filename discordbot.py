@@ -74,7 +74,7 @@ async def on_message(message):
             await message.channel.send(f'現オーナー名：{message.guild.owner}')
             member_count_server = len(message.guild.members) -5
             await message.channel.send(f'今のサーバー人数：{member_count_server}人')
-            await message.channel.send(f'総チャンネル数：{message.guild.channels}個')
+            await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
             
 #おみくじ
     if message.content == "おみくじ":
