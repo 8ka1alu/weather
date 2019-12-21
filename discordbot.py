@@ -25,6 +25,7 @@ lot_result_channel_id3 = 613346718624251944 #class-rusviet
 lot_result_channel_id4 = 613346798383267841 #class-nordic
 
 master_owner_id = 459936557432963103 or 436078064292855818
+great_owner_id = 459936557432963103
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -60,10 +61,15 @@ async def on_message(message):
     
     if message.author.bot:  # ボットのメッセージをハネる
         return 
-    if message.content == '!restart':  
-        await client.logout()  
-        os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
-  
+    if message.content == '!restart': 
+        if message.author.id == great_owner_id:
+            await message.channel.send('再起動します')
+            await asyncio.sleep(0.5)
+            await client.logout()  
+            os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
+        if not message.author.id == great_owner_id:
+            await message.channel.send('貴方にこのコマンドの使用権限はありません')
+
 #おみくじ
     if message.content == "おみくじ":
         # Embedを使ったメッセージ送信 と ランダムで要素を選択
