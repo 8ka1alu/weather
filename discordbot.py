@@ -70,10 +70,9 @@ async def on_message(message):
             await message.channel.send('貴方にこのコマンドの使用権限はありません')
     if message.content == 'ステータス':
         if message.author.id == master_owner_id:
-            await message.channel.send(message.guild.name)
-            await message.channel.send(message.guild.owner)
+            await message.channel.send(f'サーバー名：{message.guild.name}')
+            await message.channel.send(f'現オーナー名：{message.guild.owner}')
             member_count_server = len(message.guild.members) -5
-            await message.channel.send(f'今のサーバー人数：{len(message.guild.members)}人')
             await message.channel.send(f'今のサーバー人数：{member_count_server}人')
             
 #おみくじ
