@@ -30,7 +30,6 @@ great_owner_id = 459936557432963103
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
-
 #起動メッセージ
 @client.event
 async def on_ready():
@@ -45,7 +44,6 @@ async def on_ready():
     await channel.send(f'ID:{client.user.id}')  # ボットのID
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
     await channel.send('----------------')
-    await channel.send(f'今のサーバー人数：{len(guild.members)}人')
     await channel.send('状態：BOT再起動しました。')   
     await client.change_presence(activity=discord.Game(name='ギルド専属ナビ'))
 
@@ -70,6 +68,10 @@ async def on_message(message):
             os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
         if not message.author.id == great_owner_id:
             await message.channel.send('貴方にこのコマンドの使用権限はありません')
+        if message.content.startswith(″member_count"): #から始まるメッセージ
+        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
+            if message.author.id == master_owner_id:
+                await message.channel.send(f'今のサーバー人数：{len(message.guild.members)}人')
 
 #おみくじ
     if message.content == "おみくじ":
