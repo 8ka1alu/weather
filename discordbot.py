@@ -73,7 +73,7 @@ async def on_message(message):
             await message.channel.send(f'今のサーバー人数：{len(message.guild.members)}人')
     if message.content == 'ステータス2':
         if message.author.id == master_owner_id:
-            await message.channel.send(f'{len(message.guild.icon)}')
+            await message.channel.send(message.guild.icon)
 
 
 #おみくじ
