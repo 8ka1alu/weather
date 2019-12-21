@@ -68,10 +68,9 @@ async def on_message(message):
             os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
         if not message.author.id == great_owner_id:
             await message.channel.send('貴方にこのコマンドの使用権限はありません')
-        if message.content.startswith(″member_count"): #から始まるメッセージ
-        #指定したチャンネルとメッセージを送ったチャンネルが同じIDなら実行
-            if message.author.id == master_owner_id:
-                await message.channel.send(f'今のサーバー人数：{len(message.guild.members)}人')
+    if message.content.startswith(″member_count"): #から始まるメッセージ
+        if message.author.id == master_owner_id:
+            await message.channel.send(f'今のサーバー人数：{len(message.guild.members)}人')
 
 #おみくじ
     if message.content == "おみくじ":
