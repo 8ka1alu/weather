@@ -45,7 +45,7 @@ async def on_ready():
     await channel.send(f'ID:{client.user.id}')  # ボットのID
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
     await channel.send('----------------')
-    await channel.send(f'今のサーバー人数：{len(message.guild.members)}人')
+    await channel.send(f'今のサーバー人数：{len(guild.members)}人')
     await channel.send('状態：BOT再起動しました。')   
     await client.change_presence(activity=discord.Game(name='ギルド専属ナビ'))
 
