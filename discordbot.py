@@ -68,6 +68,7 @@ async def on_message(message):
             os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
         if not message.author.id == great_owner_id:
             await message.channel.send('貴方にこのコマンドの使用権限はありません')
+
     if message.content == 'ステータス':
         if message.author.id == master_owner_id:
             await message.channel.send(f'サーバー名：{message.guild.name}')
@@ -75,6 +76,7 @@ async def on_message(message):
             member_count_server = len(message.guild.members) -5
             await message.channel.send(f'今のサーバー人数：{member_count_server}人')
             await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
+            await message.channel.send(f'総チャンネル数：{len(message.guild.member_count)}個')
             await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
             await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
             embed = discord.Embed(title="サーバーアイコン")
