@@ -75,7 +75,10 @@ async def on_message(message):
             await message.channel.send(f'現オーナー名：{message.guild.owner}')
             member_count_server = len(message.guild.members) -5
             await message.channel.send(f'今のサーバー人数：{member_count_server}人')
-            await message.channel.send(len([i for i in ctx.guild.members if i.bot == False]))
+            member_count = sum(1 for member in guild.members if not member.bot)
+            await message.channel.send(member_count)
+            bot_count = sum(1 for member in guild.memers if member.bot)
+            await message.channel.send(bot_count)
             await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
             await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
             await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
