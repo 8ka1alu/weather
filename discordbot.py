@@ -75,13 +75,13 @@ async def on_message(message):
             await message.channel.send(f'現オーナー名：{message.guild.owner}')
             member_count_server = len(message.guild.members) -5
             await message.channel.send(f'今のサーバー人数：{member_count_server}人')
+            await message.channel.send(f'総bot数：{len([i for i in ctx.guild.members if i.bot])}個')
             await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
             await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
             await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
             embed = discord.Embed(title="サーバーアイコン")
             embed.set_image(url=message.guild.icon_url)
             await message.channel.send(embed=embed)
-            await message.channel.send(f'総bot数：{len(message.guild.user.bots)}個')
             
 
 #おみくじ
