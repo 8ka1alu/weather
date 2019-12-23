@@ -71,23 +71,21 @@ async def on_message(message):
 
     if message.content == 'ステータス':
         if message.author.id == master_owner_id:
-            guild = message.guild
             await message.channel.send(f'サーバー名：{message.guild.name}')
             await message.channel.send(f'現オーナー名：{message.guild.owner}')
-            member_count_server = len(message.guild.members) -5
-            await message.channel.send(f'総人数：{member_count_server}人')
+            guild = message.guild
             member_count = sum(1 for member in guild.members if not member.bot)
-            await message.channel.send(f'メンバー数：{member_count}人')
             bot_count = sum(1 for member in guild.members if member.bot)
-            await message.channel.send(f'BOT数：{member_count}個')
+            await message.channel.send(f'ユーザ数：{member_count}')
+            await message.channel.send(f'BOT数：{bot_count}') 
             await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
             await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
             await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
             embed = discord.Embed(title="サーバーアイコン")
             embed.set_image(url=message.guild.icon_url)
             await message.channel.send(embed=embed)
-            
-
+      
+    
 #おみくじ
     if message.content == "おみくじ":
         # Embedを使ったメッセージ送信 と ランダムで要素を選択
