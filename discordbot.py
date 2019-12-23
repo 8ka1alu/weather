@@ -71,6 +71,7 @@ async def on_message(message):
 
     if message.content == 'ステータス':
         if message.author.id == master_owner_id:
+            guild = message.guild
             await message.channel.send(f'サーバー名：{message.guild.name}')
             await message.channel.send(f'現オーナー名：{message.guild.owner}')
             member_count_server = len(message.guild.members) -5
