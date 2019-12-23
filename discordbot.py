@@ -68,25 +68,6 @@ async def on_message(message):
             os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
         if not message.author.id == great_owner_id:
             await message.channel.send('貴方にこのコマンドの使用権限はありません')
-
-    if message.content == 'ステータス':
-        if message.author.id == master_owner_id:
-            await message.channel.send(f'サーバー名：{message.guild.name}')
-            await message.channel.send(f'現オーナー名：{message.guild.owner}')
-            guild = message.guild
-            member_count = sum(1 for member in guild.members if not member.bot) -1
-            bot_count = sum(1 for member in guild.members if member.bot) -1
-            all_count = (member_count) + (bot_count)
-            await message.channel.send(f'総人数：{all_count}人')
-            await message.channel.send(f'ユーザ数：{member_count}')
-            await message.channel.send(f'BOT数：{bot_count}') 
-            await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
-            await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
-            await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
-            embed = discord.Embed(title="サーバーアイコン")
-            embed.set_image(url=message.guild.icon_url)
-            await message.channel.send(embed=embed)
-    
     if message.content == 'ステータステスト':
         if message.author.id == master_owner_id:
             await message.channel.send(f'総数：{message.guild.members}')
@@ -254,6 +235,24 @@ async def on_message(message):
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
 
+    if message.content == 'ステータス':
+        if message.author.id == master_owner_id:
+            await message.channel.send(f'サーバー名：{message.guild.name}')
+            await message.channel.send(f'現オーナー名：{message.guild.owner}')
+            guild = message.guild
+            member_count = sum(1 for member in guild.members if not member.bot) -1
+            bot_count = sum(1 for member in guild.members if member.bot) -1
+            all_count = (member_count) + (bot_count)
+            await message.channel.send(f'総人数：{all_count}人')
+            await message.channel.send(f'ユーザ数：{member_count}')
+            await message.channel.send(f'BOT数：{bot_count}') 
+            await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
+            await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
+            await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
+            embed = discord.Embed(title="サーバーアイコン")
+            embed.set_image(url=message.guild.icon_url)
+            await message.channel.send(embed=embed)
+    
     if '議題作成' in message.content:
         if message.author.guild_permissions.administrator:
             match = re.search(r".*タイトルは(.+)、サブタイトルは(.+)。.*", message.content)
