@@ -74,9 +74,10 @@ async def on_message(message):
             await message.channel.send(f'サーバー名：{message.guild.name}')
             await message.channel.send(f'現オーナー名：{message.guild.owner}')
             guild = message.guild
-            member_count = sum(1 for member in guild.members if not member.bot)
-            bot_count = sum(1 for member in guild.members if member.bot)
-            await message.channel.send(f'総人数：{member_count}+{bot_count}人')
+            member_count = sum(1 for member in guild.members if not member.bot) -1
+            bot_count = sum(1 for member in guild.members if member.bot) -1
+            all_count = (member_count) + (bot_count)
+            await message.channel.send(f'総人数：{all_count}人')
             await message.channel.send(f'ユーザ数：{member_count}')
             await message.channel.send(f'BOT数：{bot_count}') 
             await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
