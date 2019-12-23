@@ -86,7 +86,11 @@ async def on_message(message):
             embed = discord.Embed(title="サーバーアイコン")
             embed.set_image(url=message.guild.icon_url)
             await message.channel.send(embed=embed)
-      
+    
+    if message.content == 'ステータステスト':
+        if message.author.id == master_owner_id:
+            await message.channel.send(f'総数：{message.guild.members}')
+                 
     
 #おみくじ
     if message.content == "おみくじ":
