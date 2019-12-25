@@ -277,7 +277,7 @@ async def on_message(message):
             embed.add_field(name="総チャンネル数",value=f'{len(message.guild.channels)}個',inline=False)
             embed.add_field(name="テキストチャンネル数",value=f'{len(message.guild.text_channels)}個',inline=False)
             embed.add_field(name="ボイスチャンネル数",value=f'{len(message.guild.voice_channels)}個',inline=False)
-            embed.add_field(name="サーバーアイコン")
+            embed = discord.Embed(title="サーバーアイコン")
             embed.set_image(url=message.guild.icon_url)
             await message.channel.send(embed=embed)
 
