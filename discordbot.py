@@ -67,7 +67,12 @@ async def on_message(message):
             await client.logout()  
             os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
         if not message.author.id == great_owner_id:
-            await message.channel.send('貴方にこのコマンドの使用権限はありません')             
+            await message.channel.send('貴方にこのコマンドの使用権限はありません')   
+
+        if message.content.startswith("ステータスvc"):
+            if message.author.guild_permissions.administrator:
+                name = [member.name for member in message.author.voice.channel.members]
+                await message.channel.send(name)          
     
 #おみくじ
     if message.content == "おみくじ":
