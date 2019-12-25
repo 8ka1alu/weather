@@ -262,6 +262,25 @@ async def on_message(message):
             embed.set_image(url=message.guild.icon_url)
             await message.channel.send(embed=embed)
     
+    if message.content == 'ステータス１':
+        if message.author.id == master_owner_id:
+            embed = discord.Embed(title="この鯖のステータス",description="Embed式")
+            embed.add_field(name="サーバー名",value="f{message.guild.name}",inline=False)
+            embed.add_field(name="現オーナー名",value="f{message.guild.owner}",inline=False)
+            guild = message.guild
+            member_count = sum(1 for member in guild.members if not member.bot) 
+            bot_count = sum(1 for member in guild.members if member.bot) 
+            all_count = (member_count) + (bot_count)
+            embed.add_field(name="総人数",value="f{all_count}",inline=False)
+            embed.add_field(name="ユーザ数",value="f{member_count}",inline=False)
+            embed.add_field(name="BOT数",value="f{bot_count}",inline=False)
+            embed.add_field(name="総チャンネル数",value="f{len(message.guild.channels)}個",inline=False)
+            embed.add_field(name="テキストチャンネル数",value="f{len(message.guild.text_channels)}個",inline=False)
+            embed.add_field(name="ボイスチャンネル数",value="f{len(message.guild.voice_channels)}個",inline=False)
+            embed.add_field(name="サーバーアイコン",inline=False)
+            embed.set_image(url=message.guild.icon_url)
+            await message.channel.send(embed=embed)
+
     if '議題作成' in message.content:
         if message.author.guild_permissions.administrator:
             match = re.search(r".*タイトルは(.+)、サブタイトルは(.+)。.*", message.content)
