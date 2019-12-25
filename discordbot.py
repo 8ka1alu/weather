@@ -273,7 +273,7 @@ async def on_message(message):
             all_count = (member_count) + (bot_count)
             embed.add_field(name="総人数",value=f'{all_count}',inline=False)
             embed.add_field(name="ユーザ数",value=f'{member_count}',inline=False)
-            embed.add_field(name="BOT数",value=f'{bot_count}',inline=False)
+            embed.add_field(name="BOT数",value=f'{bot_count}',inline=True)
             embed.add_field(name="総チャンネル数",value=f'{len(message.guild.channels)}個',inline=False)
             embed.add_field(name="テキストチャンネル数",value=f'{len(message.guild.text_channels)}個',inline=False)
             embed.add_field(name="ボイスチャンネル数",value=f'{len(message.guild.voice_channels)}個',inline=False)
