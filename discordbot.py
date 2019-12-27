@@ -45,7 +45,7 @@ async def on_ready():
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
     await channel.send('----------------')
     await channel.send('状態：BOT再起動しました。')   
-    await client.change_presence(status=discord.Status.dnd,activity=discord.Game(name='ギルド専属ナビ'))
+    await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
     
 @client.event
 async def on_message(message):
@@ -307,17 +307,6 @@ async def loop():
     elif now == '23:00':
         channel = client.get_channel(CHANNEL_ID)
         await channel.send('２３：００です！おやすみなさい！以降のメンションはお控え下さい。') 
-#ループ処理実行
-loop.start()
-
-@tasks.loop(seconds=40)
-async def loop():
-    await client.change_presence(status=discord.Status.dnd,activity=discord.Game(name='ギルド専属ナビ'))
-    await asyncio.sleep(10)
-    await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
-    await asyncio.sleep(10)
-    await client.change_presence(status=discord.Status.online,activity=discord.Game(name='ギルド専属ナビ'))
-    await asyncio.sleep(10)  
 #ループ処理実行
 loop.start()
 
