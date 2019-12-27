@@ -45,7 +45,7 @@ async def on_ready():
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
     await channel.send('----------------')
     await channel.send('状態：BOT再起動しました。')   
-    await client.change_presence(status=discord.Status.idl,activity=discord.Game(name='ギルド専属ナビ'))
+    await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
     
 @client.event
 async def on_message(message):
