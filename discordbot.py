@@ -310,6 +310,17 @@ async def loop():
 #ループ処理実行
 loop.start()
 
+@tasks.loop(seconds=40)
+async def loop():
+    await client.change_presence(status=discord.Status.dnd,activity=discord.Game(name='ギルド専属ナビ'))
+    await asyncio.sleep(10)
+    await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
+    await asyncio.sleep(10)
+    await client.change_presence(status=discord.Status.online,activity=discord.Game(name='ギルド専属ナビ'))
+    await asyncio.sleep(10)  
+#ループ処理実行
+loop.start()
+
 client.run(TOKEN)
 
 #リリナ
