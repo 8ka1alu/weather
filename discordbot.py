@@ -95,6 +95,8 @@ async def on_message(message):
 
     if message.content == 'お知らせ': 
         if message.author.id == great_owner_id:
+            await message.delete()
+            await asyncio.sleep(0.5)
             await client.get_channel(CHANNEL_ID5).send('>>> **お知らせ** \n <@&613345887933956096> \n <#624496341124513793> に追加コマンド導入！ \n 「**御神籤**」と入力しよう！ \n \n \n ver4.0.1')
            
 #運勢
