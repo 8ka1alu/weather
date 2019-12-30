@@ -17,6 +17,7 @@ CHANNEL_ID = 613341065365291010  #top
 CHANNEL_ID2 = 613346606347190274 #testlog
 CHANNEL_ID3 = 624496341124513793 #omikuji
 CHANNEL_ID4 = 613346909154836517 #ID取得
+CHANNEL_ID5 = 613343508153106443
 
 lot_channel_id = 643070878652825601 #ここにコマンドを送るチャンネルID
 lot_result_channel_id1 = 613346390092939275 #class-saxony
@@ -94,7 +95,7 @@ async def on_message(message):
 
     if message.content == 'お知らせ': 
         if message.author.id == great_owner_id:
-            await client.get_channel(CHANNEL_ID).send('**お知らせ** \n omikuji機能に追加コマンド導入！ \n 「**御神籤**」と入力しよう！ \n \n ver4.0.1')
+            await client.get_channel(CHANNEL_ID5).send('>>> **お知らせ** \n omikuji機能に追加コマンド導入！ \n 「**御神籤**」と入力しよう！ \n \n ver4.0.1')
            
 #運勢
     if message.content == '運勢':
