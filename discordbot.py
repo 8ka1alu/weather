@@ -129,22 +129,22 @@ async def on_message(message):
         await asyncio.sleep(0.1)
         prob = random.random()
     
-        if prob < 0.01: #大凶
+        if prob < 0.02: #大凶
             await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655056313637666816/20191213233945.jpg')
         
-        elif prob < 0.20: #凶
+        elif prob < 0.10: #凶
             await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655055945659056134/20191213233816.jpg')
         
-        elif prob < 0.40: #吉
+        elif prob < 0.35: #吉
             await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655055610441891840/20191213233638.jpg')
         
         elif prob < 0.55: #半吉
             await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054936773754890/20191213233418.jpg')
         
-        elif prob < 0.70: #小吉
+        elif prob < 0.75: #小吉
             await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054736638345238/20191213233326.jpg')
         
-        elif prob < 0.85: #末吉
+        elif prob < 0.95: #末吉
             await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054481956012046/20191213233205.jpg')
        
         elif prob <= 1.0: #大吉
