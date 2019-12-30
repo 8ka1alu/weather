@@ -70,11 +70,12 @@ async def on_message(message):
         if not message.author.id == great_owner_id:
             await message.channel.send('貴方にこのコマンドの使用権限はありません')   
 
-        if message.content.startswith("ステータスvc"):
-            if message.author.guild_permissions.administrator:
-                name = [member.name for member in message.author.voice.channel.members]
-                await message.channel.send(name)          
-    
+        if message.content.startswith("ヘルプおみくじ"):         
+            embed = discord.Embed(title="<#624496341124513793> 確率表",description="おみくじ")
+            embed.add_field(name="ランダム式により",value="不明",inline=False)
+            await message.channel.send(embed=embed)
+
+
 #おみくじ
     if message.content == "おみくじ":
         # Embedを使ったメッセージ送信 と ランダムで要素を選択
