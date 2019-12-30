@@ -92,6 +92,10 @@ async def on_message(message):
     if message.content == 'ヘルプ':
         await message.channel.send('>>> **リリナのコマンド一覧** \n \n **何時？** \n ・今の時間を教えてくれます！(何時何分何秒) \n **何日？** \n ・何日か教えてくれます！(何月何日) \n **!dice XdY** \n Y面のダイスをX回振ります！ \n \n ~~以下のコマンドは <#624496341124513793> で使えます。~~ \n **おみくじ** \n ・おみくじが引けます！ \n **運勢** \n ・貴方の運勢は！') 
 
+    if message.content == 'お知らせ': 
+        if message.author.id == great_owner_id:
+            await message.channel.send('**お知らせ** \n omikuji機能に追加コマンド導入！ \n 「**御神籤**」と入力しよう！ \n \n ver4.0.1')
+           
 #運勢
     if message.content == '運勢':
         prob = random.random()
@@ -118,8 +122,7 @@ async def on_message(message):
             await message.channel.send('おめでとうございます！大吉ですよ！(๑>∀<๑)♥')   
          
     if message.content == '御神籤':
-        await message.delete()
-        await asyncio.sleep(2)
+        await asyncio.sleep(0.1)
         prob = random.random()
     
         if prob < 0.01: #大凶
@@ -315,3 +318,4 @@ client.run(TOKEN)
 #リリナ
 #family and friend
 #検索結果
+#ver 4.0.1
