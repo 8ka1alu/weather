@@ -15,7 +15,7 @@ TOKEN = os.environ['DISCORD_BOT_TOKEN']
 #チャンネルID
 CHANNEL_ID = 613341065365291010  #top
 CHANNEL_ID2 = 613346606347190274 #testlog
-CHANNEL_ID3 = 624496341124513793 #omikuji
+CHANNEL_ID3 = 624496341124513793 or 661705202424086547 #omikuji
 CHANNEL_ID4 = 613346909154836517 #ID取得
 CHANNEL_ID5 = 613343508153106443
 
@@ -78,13 +78,16 @@ async def on_message(message):
 
 #おみくじ
     if message.content == "おみくじ":
-        # Embedを使ったメッセージ送信 と ランダムで要素を選択
-        embed = discord.Embed(title="おみくじ", description=f"{message.author.mention}さんの今日の運勢は！",
-                              color=0x2ECC69)
-        embed.set_thumbnail(url=message.author.avatar_url)
-        embed.add_field(name="[運勢] ", value=random.choice(('大吉', '中吉', '小吉', '吉', '半吉', '末吉', '末小吉', '凶', '小凶', '半凶', '末凶', '大凶')), inline=False)
-        await client.get_channel(CHANNEL_ID3).send(embed=embed)
-        #client.get_channel(CHANNEL_ID3)
+        if message.channel.id == CHANNEL_ID3:
+            # Embedを使ったメッセージ送信 と ランダムで要素を選択
+            embed = discord.Embed(title="おみくじ", description=f"{message.author.mention}さんの今日の運勢は！",
+                                  color=0x2ECC69)
+            embed.set_thumbnail(url=message.author.avatar_url)
+            embed.add_field(name="[運勢] ", value=random.choice(('大吉', '中吉', '小吉', '吉', '半吉', '末吉', '末小吉', '凶', '小凶', '半凶', '末凶', '大凶')), inline=False)
+            await message.channel.send(embed=embed)
+            #client.get_channel(CHANNEL_ID3)
+        if not message.channel.id == CHANNEL_ID3:
+            await message.delete()
 
     if message.content == 'ダイス':
         suji=random.choice(('1', '2', '3', '4', '5', '6'))
@@ -102,54 +105,59 @@ async def on_message(message):
            
 #運勢
     if message.content == '運勢':
-        prob = random.random()
+        if message.channel.id == CHANNEL_ID3:
+            prob = random.random()
     
-        if prob < 0.3:
-            await client.get_channel(CHANNEL_ID3).send('凶です……外出を控えることをオススメします')
+            if prob < 0.3:
+                await message.channel.send('凶です……外出を控えることをオススメします')
+           
+            elif prob < 0.65:
+                await message.channel.send('吉です！何かいい事があるかもですね！')
         
-        elif prob < 0.65:
-            await client.get_channel(CHANNEL_ID3).send('吉です！何かいい事があるかもですね！')
+            elif prob < 0.71:
+                await message.channel.send('末吉……どれくらい運がいいんでしょうね？•́ω•̀)?')
         
-        elif prob < 0.71:
-            await client.get_channel(CHANNEL_ID3).send('末吉……どれくらい運がいいんでしょうね？•́ω•̀)?')
+            elif prob < 0.76:
+                await message.channel.send('半吉は吉の半分、つまり運がいいのです！')
         
-        elif prob < 0.76:
-            await client.get_channel(CHANNEL_ID3).send('半吉は吉の半分、つまり運がいいのです！')
+            elif prob < 0.80:
+                await message.channel.send('小吉ですね！ちょっと優しくされるかも？')
         
-        elif prob < 0.80:
-            await client.get_channel(CHANNEL_ID3).send('小吉ですね！ちょっと優しくされるかも？')
-        
-        elif prob < 0.83:
-            await client.get_channel(CHANNEL_ID3).send('吉の中で1番当たっても微妙に感じられる……つまり末吉なのです( ´･ω･`)')
+            elif prob < 0.83:
+                await message.channel.send('吉の中で1番当たっても微妙に感じられる……つまり末吉なのです( ´･ω･`)')
        
-        elif prob <= 1.0:
-            await client.get_channel(CHANNEL_ID3).send('おめでとうございます！大吉ですよ！(๑>∀<๑)♥')   
-         
+            elif prob <= 1.0:
+                await message.channel.send('おめでとうございます！大吉ですよ！(๑>∀<๑)♥')   
+        if not message.channel.id == CHANNEL_ID3:
+            await message.delete() 
+
     if message.content == '御神籤':
-        await asyncio.sleep(0.1)
-        prob = random.random()
+        if message.channel.id == CHANNEL_ID3:
+            await asyncio.sleep(0.1)
+            prob = random.random()
     
-        if prob < 0.02: #大凶
-            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655056313637666816/20191213233945.jpg')
+            if prob < 0.02: #大凶
+                await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655056313637666816/20191213233945.jpg')
         
-        elif prob < 0.10: #凶
-            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655055945659056134/20191213233816.jpg')
+            elif prob < 0.10: #凶
+                await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655055945659056134/20191213233816.jpg')
         
-        elif prob < 0.35: #吉
-            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655055610441891840/20191213233638.jpg')
+            elif prob < 0.35: #吉
+                await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655055610441891840/20191213233638.jpg')
         
-        elif prob < 0.55: #半吉
-            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054936773754890/20191213233418.jpg')
+            elif prob < 0.55: #半吉
+                await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655054936773754890/20191213233418.jpg')
         
-        elif prob < 0.75: #小吉
-            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054736638345238/20191213233326.jpg')
+            elif prob < 0.75: #小吉
+                await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655054736638345238/20191213233326.jpg')
         
-        elif prob < 0.95: #末吉
-            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655054481956012046/20191213233205.jpg')
+            elif prob < 0.95: #末吉
+                await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655054481956012046/20191213233205.jpg')
        
-        elif prob <= 1.0: #大吉
-            await client.get_channel(CHANNEL_ID3).send('https://cdn.discordapp.com/attachments/649413089778728970/655051678499995651/20191213232052.jpg')   
-        
+            elif prob <= 1.0: #大吉
+                await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655051678499995651/20191213232052.jpg')   
+        if not message.channel.id == CHANNEL_ID3:
+            await message.delete()
    
 #年月日
     if all(s in message.content for s in['何日？']):
@@ -298,10 +306,11 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
-    injoin = f'{member.mention} さん！いらっしゃい！ \n 私は <@511397857887125539> です！ \n 私について分からないことがありましたら、「ヘルプ」と打ってね☆'
-    await client.get_channel(CHANNEL_ID4).send(member.name)
-    await client.get_channel(CHANNEL_ID4).send(member.id)
-    await client.get_channel(CHANNEL_ID).send(injoin)
+    if message.channel.id == CHANNEL_ID:
+        injoin = f'{member.mention} さん！いらっしゃい！ \n 私は <@511397857887125539> です！ \n 私について分からないことがありましたら、「ヘルプ」と打ってね☆'
+        await client.get_channel(CHANNEL_ID4).send(member.name)
+        await client.get_channel(CHANNEL_ID4).send(member.id)
+        await client.get_channel(CHANNEL_ID).send(injoin)
                   
 # 60秒に一回ループ
 @tasks.loop(seconds=60)
