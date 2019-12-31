@@ -131,7 +131,7 @@ async def on_message(message):
        
             elif prob <= 1.0:
                 await message.channel.send('おめでとうございます！大吉ですよ！(๑>∀<๑)♥')   
-        if not message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
+        else:
             await message.delete()
             await message.channel.send('ここでは出来ないよ！') 
 
