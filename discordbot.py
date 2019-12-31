@@ -338,3 +338,4 @@ client.run(TOKEN)
 #family and friend
 #検索結果
 #ver 4.0.1
+#.user
