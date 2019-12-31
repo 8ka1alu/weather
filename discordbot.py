@@ -15,9 +15,10 @@ TOKEN = os.environ['DISCORD_BOT_TOKEN']
 #チャンネルID
 CHANNEL_ID = 613341065365291010  #top
 CHANNEL_ID2 = 613346606347190274 #testlog
-CHANNEL_ID3 = 624496341124513793 or 661705202424086547 #omikuji
+CHANNEL_ID3 = 624496341124513793 #omikuji
 CHANNEL_ID4 = 613346909154836517 #ID取得
 CHANNEL_ID5 = 613343508153106443
+CHANNEL_IDother = 661705202424086547
 
 lot_channel_id = 643070878652825601 #ここにコマンドを送るチャンネルID
 lot_result_channel_id1 = 613346390092939275 #class-saxony
@@ -78,7 +79,7 @@ async def on_message(message):
 
 #おみくじ
     if message.content == "おみくじ":
-        if message.channel.id == CHANNEL_ID3:
+        if message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
             # Embedを使ったメッセージ送信 と ランダムで要素を選択
             embed = discord.Embed(title="おみくじ", description=f"{message.author.mention}さんの今日の運勢は！",
                                   color=0x2ECC69)
