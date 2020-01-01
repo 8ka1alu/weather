@@ -87,10 +87,7 @@ async def on_message(message):
             embed.add_field(name="[運勢] ", value=random.choice(('大吉', '中吉', '小吉', '吉', '半吉', '末吉', '末小吉', '凶', '小凶', '半凶', '末凶', '大凶')), inline=False)
             await message.channel.send(embed=embed)
             #client.get_channel(CHANNEL_ID3)
-        if not message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
-            await message.delete()
-            await message.channel.send('ここでは出来ないよ！') 
-    
+        
 
     if message.content == 'ダイス':
         suji=random.choice(('1', '2', '3', '4', '5', '6'))
@@ -131,10 +128,7 @@ async def on_message(message):
        
             elif prob <= 1.0:
                 await message.channel.send('おめでとうございます！大吉ですよ！(๑>∀<๑)♥')   
-        else:
-            await message.delete()
-            await message.channel.send('ここでは出来ないよ！') 
-
+        
 
     if message.content == '御神籤':
         if message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
@@ -161,10 +155,7 @@ async def on_message(message):
        
             elif prob <= 1.0: #大吉
                 await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655051678499995651/20191213232052.jpg')   
-        if not message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
-            await message.delete()
-            await message.channel.send('ここでは出来ないよ！') 
-
+        
    
 #年月日
     if all(s in message.content for s in['何日？']):
