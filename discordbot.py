@@ -28,7 +28,6 @@ lot_result_channel_id4 = 613346798383267841 #class-nordic
 
 master_owner_id = 459936557432963103 or 436078064292855818
 great_owner_id = 459936557432963103
-guild_member_id = guild.member.id
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -303,6 +302,8 @@ async def on_message(message):
                 embed = discord.Embed(title=title, description=subtitle,color=discord.Color.green())
                 await message.channel.send(embed=embed)
 
+    guild = message.guild
+    guild_member_id = guild.member.id
     if message.author.id == guild_member_id:
         prob = random.random()
     
