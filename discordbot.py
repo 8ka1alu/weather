@@ -302,10 +302,10 @@ async def on_message(message):
                 embed = discord.Embed(title=title, description=subtitle,color=discord.Color.green())
                 await message.channel.send(embed=embed)
 
-    if message.content == '': 
-        if message.author.id == great_owner_id:
-            await message.channel.send('(^^)')
+    if message.author.id == great_owner_id:
+        await message.channel.send('(^^)')
 
+        
 @client.event
 async def on_member_join(member):
     if message.channel.id == CHANNEL_ID:
