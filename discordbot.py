@@ -308,7 +308,8 @@ async def on_message(message):
         prob = random.random()
     
         if prob < 0.50: 
-            await send_message.add_reaction("➡")
+            await message.author.add_reaction("➡")
+
 @client.event
 async def on_member_join(member):
     if message.channel.id == CHANNEL_ID:
