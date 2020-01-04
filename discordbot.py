@@ -304,7 +304,7 @@ async def on_message(message):
                 await message.channel.send(embed=embed)
 
     
-    if message.content == "!help":
+    if message.content == "rhelp":
         page_count = 0 #ヘルプの現在表示しているページ数
         page_content_list = ["ヘルプコマンドです。\n➡絵文字を押すと次のページへ",
             "ヘルプコマンド2ページ目です。\n➡絵文字で次のページ\n⬅絵文字で前のページ",
