@@ -303,7 +303,7 @@ async def on_message(message):
                 await message.channel.send(embed=embed)
 
     
-    if message.author.id == member.id:
+    if message.author.id == message.member.id:
         prob = random.random()
     
         if prob < 0.10: 
