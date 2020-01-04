@@ -302,9 +302,8 @@ async def on_message(message):
                 embed = discord.Embed(title=title, description=subtitle,color=discord.Color.green())
                 await message.channel.send(embed=embed)
 
-    guild = message.guild
-    guild_member_id = guild.member.id
-    if message.author.id == guild_member_id:
+    
+    if message.author.id == member.id:
         prob = random.random()
     
         if prob < 0.10: 
