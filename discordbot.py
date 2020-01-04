@@ -303,9 +303,10 @@ async def on_message(message):
                 await message.channel.send(embed=embed)
 
     if message.author.id == great_owner_id:
-        await message.channel.send('(^^)')
-
-        
+        prob = random.random()
+    
+        if prob < 0.26: 
+                await message.channel.send('(。・艸・) (。-艸-)) (( 。>艸<)-3')
 @client.event
 async def on_member_join(member):
     if message.channel.id == CHANNEL_ID:
