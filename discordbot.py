@@ -307,9 +307,8 @@ async def on_message(message):
     if not message.author.id == my_bot_id:
         prob = random.random()
     
-        if prob < 0.10: 
-            await message.channel.send('(。・艸・) (。-艸-)) (( 。>艸<)-3')
-
+        if prob < 0.50: 
+            await send_message.add_reaction("➡")
 @client.event
 async def on_member_join(member):
     if message.channel.id == CHANNEL_ID:
