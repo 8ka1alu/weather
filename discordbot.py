@@ -308,14 +308,7 @@ async def on_message(message):
         prob = random.random()
     
         if prob < 0.50: 
-            await message.add_reaction("⭐")
-
-    if user != message.author:
-        prob = random.random()
-    
-        if prob < 0.50: 
-            await message.add_reaction("♥")
-            
+            await message.add_reaction("♥")           
 
 @client.event
 async def on_member_join(member):
