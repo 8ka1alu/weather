@@ -295,6 +295,12 @@ async def on_message(message):
             embed.set_thumbnail(url=message.guild.icon_url)
             await message.channel.send(embed=embed)
 
+    if message.author.id != 511397857887125539:
+        prob = random.random()
+    
+        if prob < 0.3:
+            await message.channel.add_reaction('💝')
+           
     if '議題作成' in message.content:
         if message.author.guild_permissions.administrator:
             match = re.search(r".*タイトルは(.+)、サブタイトルは(.+)。.*", message.content)
