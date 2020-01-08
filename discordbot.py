@@ -72,11 +72,6 @@ async def on_message(message):
         if not message.author.id == great_owner_id:
             await message.channel.send('貴方にこのコマンドの使用権限はありません')   
 
-        if message.content.startswith("ヘルプおみくじ"):         
-            embed = discord.Embed(title="<#624496341124513793> 確率表",description="おみくじ")
-            embed.add_field(name="ランダム式により",value="不明",inline=False)
-            await message.channel.send(embed=embed)
-
 
 #おみくじ
     if message.content == "おみくじ":
@@ -89,6 +84,18 @@ async def on_message(message):
             await message.channel.send(embed=embed)
             #client.get_channel(CHANNEL_ID3)
         
+    if message.content == 'ratk':
+        await message.channel.send('..atk')
+    if message.content == 'rsanka':
+        await message.channel.send('..i in')
+    if message.content == 'rmycoin':
+        await message.channel.send('..mycoin')
+    if message.content == 'rgatya':
+        await message.channel.send('..gatya 100')
+    if message.content == 'rlogin':
+        await message.channel.send('..login')
+    if message.content == 'rst':
+        await message.channel.send('..st')
 
     if message.content == 'ダイス':
         suji=random.choice(('1', '2', '3', '4', '5', '6'))
