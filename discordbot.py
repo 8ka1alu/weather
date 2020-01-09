@@ -313,7 +313,7 @@ async def on_message(message):
         prob = random.random()
     
         if prob < 0.6:
-            await message.channel.add_reaction('💝')
+            await message.add_reaction('💝')
            
     if '議題作成' in message.content:
         if message.author.guild_permissions.administrator:
