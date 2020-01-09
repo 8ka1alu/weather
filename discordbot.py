@@ -302,7 +302,7 @@ async def on_message(message):
             embed.set_thumbnail(url=message.guild.icon_url)
             await message.channel.send(embed=embed)
 
-    if message.author.id != 511397857887125539:
+    if not message.author.id == 511397857887125539:
         prob = random.random()
     
         if prob < 0.6:
