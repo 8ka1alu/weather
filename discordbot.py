@@ -1,6 +1,7 @@
 import discord 
 import os
 from discord.ext import tasks
+from discord.ext import commands
 from datetime import datetime
 import random
 import re
@@ -35,6 +36,8 @@ ssr_bot_id = 636400089396543526
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
+bot = commands.Bot(command_prefix='r')
+
 #起動メッセージ
 @client.event
 async def on_ready():
@@ -51,6 +54,12 @@ async def on_ready():
     await channel.send('----------------')
     await channel.send('状態：BOT再起動しました。')   
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
+
+@bot.command()
+async def repeat(times : int, content='repeating...'):
+    """Repeats a message multiple times."""
+    for i in range(times):
+        await bot.say(content)
     
 @client.event
 async def on_message(message):
