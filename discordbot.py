@@ -305,7 +305,7 @@ async def on_message(message):
     if message.author.id != 511397857887125539:
         prob = random.random()
     
-        if prob < 0.3:
+        if prob < 0.6:
             await message.channel.add_reaction('💝')
            
     if '議題作成' in message.content:
