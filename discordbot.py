@@ -61,7 +61,7 @@ async def on_message(message):
         await channel.send(' 2時間たちました！') 
 
     if '！' in message.content:
-        if message.author.id == ssr_bot_id
+        if message.author.id == ssr_bot_id:
             channel = client.get_channel(ssr_ch)
             await message.channel.send('..i in')
 
