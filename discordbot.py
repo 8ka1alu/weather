@@ -29,6 +29,7 @@ lot_result_channel_id4 = 613346798383267841 #class-nordic
 master_owner_id = 459936557432963103 or 436078064292855818
 great_owner_id = 459936557432963103
 my_bot_id = 511397857887125539
+ssr_ch = 638239968140984330
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -57,6 +58,11 @@ async def on_message(message):
         await asyncio.sleep(7200)
         channel = client.get_channel(CHANNEL_ID2)
         await channel.send(' 2時間たちました！') 
+
+    if '！' in message.content:
+        if message.author.id == 636400089396543526
+            channel = client.get_channel(ssr_ch)
+            await message.channel.send('..i in')
 
     if message.content.startswith("23"): 
         await message.channel.send('2時間たちました！') 
