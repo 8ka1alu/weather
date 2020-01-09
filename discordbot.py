@@ -1,7 +1,6 @@
 import discord 
 import os
 from discord.ext import tasks
-from discord.ext import commands
 from datetime import datetime
 import random
 import re
@@ -36,8 +35,6 @@ ssr_bot_id = 636400089396543526
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
-bot = commands.Bot(command_prefix='rn!')
-
 #起動メッセージ
 @client.event
 async def on_ready():
@@ -55,16 +52,6 @@ async def on_ready():
     await channel.send('状態：BOT再起動しました。')   
     await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
 
-@bot.command(pass_context=True)
-async def ping(ctx):
-    """ Pong! """
-    await delete_message(ctx.message)
-    before = time.monotonic()
-    message = await ctx.send("Pong!")
-    ping = (time.monotonic() - before) * 1000
-    await message.edit(content=f"Pong!  `{int(ping)}ms`")
-    print(f'Ping {int(ping)}ms')
-    
 @client.event
 async def on_message(message):
     """メッセージを処理"""
