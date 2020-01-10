@@ -60,7 +60,7 @@ async def on_message(message):
         channel = client.get_channel(CHANNEL_ID2)
         await channel.send(' 2時間たちました！') 
 
-    if 'です！' in message.content:
+    if 'です' in message.content:
         if message.channel.id == ssr_bot_ch:
             await client.get_channel(ssr_ch).send('..i in')
 
