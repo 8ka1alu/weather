@@ -103,19 +103,208 @@ async def on_message(message):
     if message.content == 'rst':
         await message.channel.send('..st')
 
-    if message.content == 'ダイス':
-        suji=random.choice(('1', '2', '3', '4', '5', '6'))
-        await message.delete()
-        await message.channel.send(suji) 
- 
     if message.content == 'ヘルプ':
-        await message.channel.send('>>> **リリナのコマンド一覧** \n \n **何時？** \n ・今の時間を教えてくれます！(何時何分何秒) \n **何日？** \n ・何日か教えてくれます！(何月何日) \n **!dice XdY** \n Y面のダイスをX回振ります！ \n \n ~~以下のコマンドは <#624496341124513793> で使えます。~~ \n **おみくじ** \n ・おみくじが引けます！ \n **運勢** \n ・貴方の運勢は！') 
+        page_count = 0 #ヘルプの現在表示しているページ数
+        page_content_list = ["**リリナのコマンド一覧(ページ1)**\n\n**何時？**：今の時間を教えてくれます！(何時何分何秒)\n**何日？**：何日か教えてくれます！(何月何日)\n\n➡絵文字を押すと次のページへ",
+            "**リリナのコマンド一覧(ページ2)**\n\n**!dc XdY**：Y面のダイスをX回振ります！\n**coin**：コイントスを行います。\n**スロット**：あなたは大当たりを引けるのか!？\n➡絵文字で次のページ\n⬅絵文字で前のページ\n\nページ2",
+            "**リリナのコマンド一覧(ページ3)**\n\n以下のコマンドは<#624496341124513793>で使えます。\n\n**おみくじ**or**御神籤**：おみくじが引けます！\n**運勢**：貴方の運勢は！\n\n⬅絵文字で前のページ"] #ヘルプの各ページ内容
+        
+        send_message = await message.channel.send(page_content_list[0]) #最初のページ投稿
+        await send_message.add_reaction("➡")
+
+        def help_react_check(reaction,user):
+            '''
+            ヘルプに対する、ヘルプリクエスト者本人からのリアクションかをチェックする
+            '''
+            emoji = str(reaction.emoji)
+            if reaction.message.id != send_message.id:
+                return 0
+            if emoji == "➡" or emoji == "⬅":
+                if user != message.author:
+                    return 0
+                else:
+                    return 1
+
+        while not client.is_closed():
+            try:
+                reaction,user = await client.wait_for('reaction_add',check=help_react_check,timeout=60.0)
+            except asyncio.TimeoutError:
+                return #時間制限が来たら、それ以降は処理しない
+            else:
+                emoji = str(reaction.emoji)
+                if emoji == "➡" and page_count < 2:
+                    page_count += 1
+                if emoji == "⬅" and page_count > 0:
+                    page_count -= 1
+
+                await send_message.clear_reactions() #事前に消去する
+                await send_message.edit(content=page_content_list[page_count])
+
+                if page_count == 0:
+                    await send_message.add_reaction("➡")
+                elif page_count == 1:
+                    await send_message.add_reaction("⬅")
+                    await send_message.add_reaction("➡")
+                elif page_count == 2:
+                    await send_message.add_reaction("⬅")
+                    #各ページごとに必要なリアクション
 
     if message.content == 'お知らせ': 
         if message.author.id == great_owner_id:
             await message.delete()
             await asyncio.sleep(0.5)
-            await client.get_channel(CHANNEL_ID5).send('>>> **お知らせ** \n <@&613345887933956096> \n <#624496341124513793> に追加コマンド導入！ \n 「**御神籤**」と入力しよう！ \n \n \n ver4.0.1')
+            await client.get_channel(CHANNEL_ID5).send('>>>**お知らせ**\n<@&613345887933956096>\n｢ヘルプ｣機能を一新\n\n\nver4.0.1')
+
+    if message.content.startswith("スロット"): 
+        suroto=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
+        suroto1=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
+        suroto2=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
+        await asyncio.sleep(0.1)
+        my_message = await message.channel.send('スロット結果がここに表示されます！')
+        await asyncio.sleep(3)
+        await my_message.edit(content='？|？|？')
+        await asyncio.sleep(1)
+        await my_message.edit(content=suroto + '|？|？')
+        await asyncio.sleep(1)
+        await my_message.edit(content=suroto + '|' + suroto1 + '|？')
+        await asyncio.sleep(1)
+        await my_message.edit(content=suroto + '|' + suroto1 + '|' + suroto2)
+        if suroto == suroto1 == suroto2:
+            await my_message.edit(content=suroto + '|' + suroto1 + '|' + suroto2 + '\n 結果：大当たり！！')
+        elif suroto == suroto1 or suroto == suroto2 or suroto1 == suroto2:
+            await my_message.edit(content=suroto + '|' + suroto1 + '|' + suroto2 + '\n 結果：リーチ！')
+        else:
+            await my_message.edit(content=suroto + '|' + suroto1 + '|' + suroto2 + '\n 結果：ハズレ')
+
+    if message.content == 'coin sn1' or message.content == 'coin sn2':
+        if message.author.id == great_owner_id:
+            coin=random.choice(('●', '○'))
+            if message.content == 'coin sn1':
+                my_message = await message.channel.send('コイントスをします！')
+                await asyncio.sleep(3)
+                await my_message.edit(content='定義：○は表、●は裏')
+                await asyncio.sleep(3)
+                await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：　```定義：○は表、●は裏```')
+                await asyncio.sleep(2)
+                await my_message.edit(content='　結果：' + coin + '```定義：○は表、●は裏 \n adid:sn1```')
+                return
+            elif message.content == 'coin sn2':
+                my_message = await message.channel.send('コイントスをします！')
+                await asyncio.sleep(3)
+                await my_message.edit(content='定義：●は表、○は裏')
+                await asyncio.sleep(3)
+                await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+                await asyncio.sleep(0.5)
+                await my_message.edit(content='抽選中：　```定義：●は表、○は裏```')
+                await asyncio.sleep(2)
+                await my_message.edit(content='　結果：'+ coin + '```定義：●は表、○は裏 \n adid:sn2```')
+                return
+        await message.channel.send('Error:You cannot use this command')  
+        return
+
+    if message.content == 'coin':
+        coin=random.choice(('●', '○'))
+        coin1=random.choice(('1', '2'))
+        await asyncio.sleep(0.1)
+        if coin1 == '1':
+            my_message = await message.channel.send('コイントスをします！')
+            await asyncio.sleep(3)
+            await my_message.edit(content='定義：○は表、●は裏')
+            await asyncio.sleep(3)
+            await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：○```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：○は表、●は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：　```定義：○は表、●は裏```')
+            await asyncio.sleep(2)
+            await my_message.edit(content='　結果：' + coin + '```定義：○は表、●は裏 \n adid:sn' + coin1 + '```')
+            
+            return
+        elif coin1 == '2':
+            my_message = await message.channel.send('コイントスをします！')
+            await asyncio.sleep(3)
+            await my_message.edit(content='定義：●は表、○は裏')
+            await asyncio.sleep(3)
+            await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：○```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：●```定義：●は表、○は裏```')
+            await asyncio.sleep(0.5)
+            await my_message.edit(content='抽選中：　```定義：●は表、○は裏```')
+            await asyncio.sleep(2)
+            await my_message.edit(content='　結果：'+ coin + '```定義：●は表、○は裏 \n adid:sn' + coin1 + '```')
+            
+            return
+        await message.channel.send('Error')
            
 #運勢
     if message.content == '運勢':
@@ -250,12 +439,12 @@ async def on_message(message):
         if not message.author.id == master_owner_id:
             await message.channel.send(f"{message.author.mention} さん。おやすみなさい。") 
 
-    if message.content.startswith("!dice"):
+    if message.content.startswith("!dc"):
         # 入力された内容を受け取る
         say = message.content 
 
-        # [!dice ]部分を消し、AdBのdで区切ってリスト化する
-        order = say.strip('!dice ')
+        # [!dc ]部分を消し、AdBのdで区切ってリスト化する
+        order = say.strip('!dc ')
         cnt, mx = list(map(int, order.split('d'))) # さいころの個数と面数
         dice = diceroll(cnt, mx) # 和を計算する関数(後述)
         await message.channel.send(dice[cnt])
