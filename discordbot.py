@@ -67,18 +67,6 @@ async def on_message(message):
     if message.content.startswith("23"): 
         await message.channel.send('2時間たちました！') 
     
-    if message.author.bot:  # ボットのメッセージをハネる
-        return 
-    if message.content == '!restart': 
-        if message.author.id == great_owner_id:
-            await message.channel.send('再起動します')
-            await asyncio.sleep(0.5)
-            await client.logout()  
-            os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
-        if not message.author.id == great_owner_id:
-            await message.channel.send('貴方にこのコマンドの使用権限はありません')   
-
-
 #おみくじ
     if message.content == "おみくじ":
         if message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
@@ -370,6 +358,67 @@ async def on_message(message):
         date = datetime.now()
         await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
 
+    if message.content.startswith("!dc"):
+        # 入力された内容を受け取る
+        say = message.content 
+
+        # [!dc ]部分を消し、AdBのdで区切ってリスト化する
+        order = say.strip('!dc ')
+        cnt, mx = list(map(int, order.split('d'))) # さいころの個数と面数
+        dice = diceroll(cnt, mx) # 和を計算する関数(後述)
+        await message.channel.send(dice[cnt])
+        del dice[cnt]
+
+        # さいころの目の総和の内訳を表示する
+        await message.channel.send(dice)
+
+    if message.content == 'ステータス':
+        if message.author.id == master_owner_id:
+            await message.channel.send(f'サーバー名：{message.guild.name}')
+            await asyncio.sleep(0.1)
+            await message.channel.send(f'現オーナー名：{message.guild.owner}')
+            await asyncio.sleep(0.1)
+            guild = message.guild
+            member_count = sum(1 for member in guild.members if not member.bot) 
+            bot_count = sum(1 for member in guild.members if member.bot) 
+            all_count = (member_count) + (bot_count)
+            await message.channel.send(f'総人数：{all_count}人')
+            await asyncio.sleep(0.1)
+            await message.channel.send(f'ユーザ数：{member_count}')
+            await asyncio.sleep(0.1)
+            await message.channel.send(f'BOT数：{bot_count}')
+            await asyncio.sleep(0.1) 
+            await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
+            await asyncio.sleep(0.1)
+            await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
+            await asyncio.sleep(0.1)
+            await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
+            await asyncio.sleep(0.1)
+            embed = discord.Embed(title="サーバーアイコン")
+            embed.set_image(url=message.guild.icon_url)
+            await message.channel.send(embed=embed)
+    
+    if message.content == 'ステータスE':
+        if message.author.id == master_owner_id:
+            embed = discord.Embed(title="この鯖のステータス",description="Embed式")
+            embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
+            embed.add_field(name="現オーナー名",value=f'{message.guild.owner}',inline=False)
+            guild = message.guild
+            member_count = sum(1 for member in guild.members if not member.bot) 
+            bot_count = sum(1 for member in guild.members if member.bot) 
+            all_count = (member_count) + (bot_count)
+            embed.add_field(name="総人数",value=f'{all_count}',inline=False)
+            embed.add_field(name="ユーザ数",value=f'{member_count}')
+            embed.add_field(name="BOT数",value=f'{bot_count}')
+            embed.add_field(name="総チャンネル数",value=f'{len(message.guild.channels)}個',inline=False)
+            embed.add_field(name="テキストチャンネル数",value=f'{len(message.guild.text_channels)}個',inline=False)
+            embed.add_field(name="ボイスチャンネル数",value=f'{len(message.guild.voice_channels)}個',inline=False)
+            embed.set_thumbnail(url=message.guild.icon_url)
+            await message.channel.send(embed=embed)
+
+    if message.author.bot:  # ボットのメッセージをハネる
+        return 
+
     if client.user in message.mentions: # 話しかけられたかの判定
         hensin = random.choice(('よんだ？', 'なにー？', 'たべちゃうぞー！', 'がおー！', 'よろしくね', '！？'))
         reply = f'{message.author.mention} さん' + hensin + '```\n 私の機能が分からなかったら「ヘルプ」と打ってね☆```' #返信メッセージの作成
@@ -441,63 +490,15 @@ async def on_message(message):
         if not message.author.id == master_owner_id:
             await message.channel.send(f"{message.author.mention} さん。おやすみなさい。") 
 
-    if message.content.startswith("!dc"):
-        # 入力された内容を受け取る
-        say = message.content 
 
-        # [!dc ]部分を消し、AdBのdで区切ってリスト化する
-        order = say.strip('!dc ')
-        cnt, mx = list(map(int, order.split('d'))) # さいころの個数と面数
-        dice = diceroll(cnt, mx) # 和を計算する関数(後述)
-        await message.channel.send(dice[cnt])
-        del dice[cnt]
-
-        # さいころの目の総和の内訳を表示する
-        await message.channel.send(dice)
-
-    if message.content == 'ステータス':
-        if message.author.id == master_owner_id:
-            await message.channel.send(f'サーバー名：{message.guild.name}')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'現オーナー名：{message.guild.owner}')
-            await asyncio.sleep(0.1)
-            guild = message.guild
-            member_count = sum(1 for member in guild.members if not member.bot) 
-            bot_count = sum(1 for member in guild.members if member.bot) 
-            all_count = (member_count) + (bot_count)
-            await message.channel.send(f'総人数：{all_count}人')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'ユーザ数：{member_count}')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'BOT数：{bot_count}')
-            await asyncio.sleep(0.1) 
-            await message.channel.send(f'総チャンネル数：{len(message.guild.channels)}個')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'テキストチャンネル数：{len(message.guild.text_channels)}個')
-            await asyncio.sleep(0.1)
-            await message.channel.send(f'ボイスチャンネル数：{len(message.guild.voice_channels)}個')
-            await asyncio.sleep(0.1)
-            embed = discord.Embed(title="サーバーアイコン")
-            embed.set_image(url=message.guild.icon_url)
-            await message.channel.send(embed=embed)
-    
-    if message.content == 'ステータスE':
-        if message.author.id == master_owner_id:
-            embed = discord.Embed(title="この鯖のステータス",description="Embed式")
-            embed.add_field(name="サーバー名",value=f'{message.guild.name}',inline=False)
-            embed.add_field(name="現オーナー名",value=f'{message.guild.owner}',inline=False)
-            guild = message.guild
-            member_count = sum(1 for member in guild.members if not member.bot) 
-            bot_count = sum(1 for member in guild.members if member.bot) 
-            all_count = (member_count) + (bot_count)
-            embed.add_field(name="総人数",value=f'{all_count}',inline=False)
-            embed.add_field(name="ユーザ数",value=f'{member_count}')
-            embed.add_field(name="BOT数",value=f'{bot_count}')
-            embed.add_field(name="総チャンネル数",value=f'{len(message.guild.channels)}個',inline=False)
-            embed.add_field(name="テキストチャンネル数",value=f'{len(message.guild.text_channels)}個',inline=False)
-            embed.add_field(name="ボイスチャンネル数",value=f'{len(message.guild.voice_channels)}個',inline=False)
-            embed.set_thumbnail(url=message.guild.icon_url)
-            await message.channel.send(embed=embed)
+    if message.content == '!restart': 
+        if message.author.id == great_owner_id:
+            await message.channel.send('再起動します')
+            await asyncio.sleep(0.5)
+            await client.logout()  
+            os.execv(sys.executable,[sys.executable, os.path.join(sys.path[0], __file__)] + sys.argv[1:])  
+        if not message.author.id == great_owner_id:
+            await message.channel.send('貴方にこのコマンドの使用権限はありません')   
 
     if not message.author.id == 511397857887125539:
         prob = random.random()
