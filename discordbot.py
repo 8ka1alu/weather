@@ -405,15 +405,6 @@ async def on_message(message):
             elif prob <= 1.0: #大吉
                 await message.channel.send('https://cdn.discordapp.com/attachments/649413089778728970/655051678499995651/20191213232052.jpg')   
         
-   
-#年月日
-    if all(s in message.content for s in['何日？']):
-        date = datetime.now()
-        await message.channel.send(f'今日は{date.year}年{date.month}月{date.day}日です！')    
-    if all(s in message.content for s in ['何時？']):
-        date = datetime.now()
-        await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
-
     if message.content.startswith("!dc"):
         # 入力された内容を受け取る
         say = message.content 
@@ -546,6 +537,13 @@ async def on_message(message):
         if not message.author.id == master_owner_id:
             await message.channel.send(f"{message.author.mention} さん。おやすみなさい。") 
 
+#年月日
+    if all(s in message.content for s in['何日？']):
+        date = datetime.now()
+        await message.channel.send(f'今日は{date.year}年{date.month}月{date.day}日です！')    
+    if all(s in message.content for s in ['何時？']):
+        date = datetime.now()
+        await message.channel.send(f'今は{date.hour}時{date.minute}分{date.second}秒だよ！')
 
     if message.content == '!restart': 
         if message.author.id == great_owner_id:
