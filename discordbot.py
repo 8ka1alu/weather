@@ -154,7 +154,7 @@ async def on_message(message):
         if message.author.id == great_owner_id:
             await message.delete()
             await asyncio.sleep(0.5)
-            await client.get_channel(CHANNEL_ID5).send('>>>**お知らせ**\n<@&613345887933956096>\n｢ヘルプ｣機能を一新\n\n\nver4.0.1')
+            await client.get_channel(CHANNEL_ID5).send('>>>**お知らせ**\n<@&613345887933956096>\n｢ヘルプ｣機能を一新！\nその他様々な機能を導入！\n詳細はヘルプを確認！\n\nver6.0.1')
 
     if message.content.startswith("スロット"): 
         suroto=random.choice(('０', '１', '２', '３', '４', '５', '６', '７', '８', '９'))
@@ -501,17 +501,9 @@ async def on_message(message):
     if not message.author.id == 511397857887125539:
         prob = random.random()
     
-        if prob < 0.6:
+        if prob < 0.15:
             await message.add_reaction('💝')
            
-    if '議題作成' in message.content:
-        if message.author.guild_permissions.administrator:
-            match = re.search(r".*タイトルは(.+)、サブタイトルは(.+)。.*", message.content)
-            if match:
-                title, subtitle = match.groups()
-                embed = discord.Embed(title=title, description=subtitle,color=discord.Color.green())
-                await message.channel.send(embed=embed)
-
     if message.content == "!edit":
         tmp = await message.channel.send("編集前メッセージ") # 編集するメッセージを保持
         await tmp.edit( content = "編集しました" )
@@ -541,7 +533,4 @@ loop.start()
 client.run(TOKEN)
 
 #リリナ
-#family and friend
-#検索結果
-#ver 4.0.1
-#.user
+#ver 6.0.1
