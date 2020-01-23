@@ -125,7 +125,7 @@ async def on_message(message):
                 return #時間制限が来たら、それ以降は処理しない
             else:
                 emoji = str(reaction.emoji)
-                if emoji == "➡" and page_count < 2:
+                if emoji == "➡" and page_count < 3:
                     page_count += 1
                 if emoji == "⬅" and page_count > 0:
                     page_count -= 1
@@ -178,7 +178,7 @@ async def on_message(message):
                 return #時間制限が来たら、それ以降は処理しない
             else:
                 emoji = str(reaction.emoji)
-                if emoji == "➡" and page_count < 2:
+                if emoji == "➡" and page_count < 4:
                     page_count += 1
                 if emoji == "⬅" and page_count > 0:
                     page_count -= 1
