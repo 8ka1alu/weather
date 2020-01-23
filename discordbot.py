@@ -506,7 +506,7 @@ async def on_message(message):
             await message.add_reaction('💝')
            
     if message.content == "rolecreate":
-        set_name = f'{massage.member.id}'
+        set_name = f'{message.author.id}'
         await client.create_role(name=set_name)
         set_role = discord.utils.get(message.guild.roles, name=set_name)
         await message.author.add_roles(set_role)
