@@ -505,9 +505,12 @@ async def on_message(message):
         if prob < 0.15:
             await message.add_reaction('💝')
            
-    if message.content == "!edit":
-        tmp = await message.channel.send("編集前メッセージ") # 編集するメッセージを保持
-        await tmp.edit( content = "編集しました" )
+    if message.content == "rolecreate":
+        set_name = member.id
+        await client.create_role(name=set_name)
+        set_role = discord.utils.get(message.guild.roles, name=set_name)
+        await message.author.add_roles(set_role)
+        await message.channel.send('完了')
 
 @client.event
 async def on_member_join(member):
