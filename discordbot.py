@@ -31,8 +31,8 @@ great_owner_id = 459936557432963103
 my_bot_id = 511397857887125539
 ssr_ch = 638239968140984330
 ssr_bot_ch = 638258742080700417
-ksi_ver = 
-discord_py_ver = 3.7.
+ksi_ver = 6.0.1 
+discord_py_ver = 3.7.3
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
