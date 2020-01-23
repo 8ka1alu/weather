@@ -129,7 +129,8 @@ async def on_message(message):
             try:
                 reaction,user = await client.wait_for('reaction_add',check=help_react_check,timeout=60.0)
             except asyncio.TimeoutError:
-                await message.channel.send('stop')
+                msg_end = '\n stop'
+                await send_message.edit(content=page_content_list[page_count] + msg_end)
                 return #時間制限が来たら、それ以降は処理しない
             else:
                 emoji = str(reaction.emoji)
