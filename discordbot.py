@@ -98,7 +98,7 @@ async def on_message(message):
         page_content_list = [">>> **リリナのコマンド一覧(ページ1)**\n\n**何時？**：今の時間を教えてくれます！(何時何分何秒)\n**何日？**：何日か教えてくれます！(何月何日)\n\n➡絵文字を押すと次のページへ",
             ">>> **リリナのコマンド一覧(ページ2)**\n\n**!dc XdY**：Y面のダイスをX回振ります！\n**coin**：コイントスを行います。\n**スロット**：あなたは大当たりを引けるのか!？\n\n➡絵文字で次のページ\n⬅絵文字で前のページ",
             ">>> **リリナのコマンド一覧(ページ3)**\n\n以下のコマンドは<#624496341124513793>で使えます。\n\n**おみくじ**or**御神籤**：おみくじが引けます！\n**運勢**：貴方の運勢は！\n\n⬅絵文字で前のページ",
-            f">>> **このBOT詳細情報(ページ4)**\n\nBOT名前:{client.user.name}\nBOT ID:{client.user.id}\nDiscordバージョン:{discord.__version__}\nDiscord.pyバージョン" + discord_py_ver + "\n開発バージョン" + ksi_ver + "\n開発者：<@459936557432963103>\n\n⬅絵文字で前のページ"] #ヘルプの各ページ内容
+            ">>> **このBOT詳細情報(ページ4)**\n\nBOT名前:" + f"{client.user.name}" + "\nBOT ID:" + f"{client.user.id}" + "\nDiscordバージョン:" + f"{discord.__version__}" + "\nDiscord.pyバージョン" + discord_py_ver + "\n開発バージョン" + ksi_ver + "\n開発者：<@459936557432963103>\n\n⬅絵文字で前のページ"] #ヘルプの各ページ内容
         
         send_message = await message.channel.send(page_content_list[0]) #最初のページ投稿
         await send_message.add_reaction("➡")
