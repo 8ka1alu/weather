@@ -106,7 +106,7 @@ async def on_message(message):
     if message.content == 'ヘルプ':
         page_count = 0 #ヘルプの現在表示しているページ数
         page_content_list = ["**リリナのコマンド一覧(ページ1)**\n\n**何時？**：今の時間を教えてくれます！(何時何分何秒)\n**何日？**：何日か教えてくれます！(何月何日)\n\n➡絵文字を押すと次のページへ",
-            "**リリナのコマンド一覧(ページ2)**\n\n**!dc XdY**：Y面のダイスをX回振ります！\n**coin**：コイントスを行います。\n**スロット**：あなたは大当たりを引けるのか!？\n➡絵文字で次のページ\n⬅絵文字で前のページ\n\nページ2",
+            "**リリナのコマンド一覧(ページ2)**\n\n**!dc XdY**：Y面のダイスをX回振ります！\n**coin**：コイントスを行います。\n**スロット**：あなたは大当たりを引けるのか!？\n\n➡絵文字で次のページ\n⬅絵文字で前のページ",
             "**リリナのコマンド一覧(ページ3)**\n\n以下のコマンドは<#624496341124513793>で使えます。\n\n**おみくじ**or**御神籤**：おみくじが引けます！\n**運勢**：貴方の運勢は！\n\n⬅絵文字で前のページ"] #ヘルプの各ページ内容
         
         send_message = await message.channel.send(page_content_list[0]) #最初のページ投稿
@@ -129,6 +129,7 @@ async def on_message(message):
             try:
                 reaction,user = await client.wait_for('reaction_add',check=help_react_check,timeout=60.0)
             except asyncio.TimeoutError:
+                await message.channel.send('stop')
                 return #時間制限が来たら、それ以降は処理しない
             else:
                 emoji = str(reaction.emoji)
