@@ -139,6 +139,62 @@ async def on_message(message):
                     await send_message.add_reaction("⬅")
                     #各ページごとに必要なリアクション
 
+    if message.content == 'ヘルプクラス' or message.content == 'クラスヘルプ':
+        page_count = 0 #ヘルプの現在表示しているページ数
+        page_content_list = [">>> **クラス一覧(ページ0)**\n\nこちらはクラスについての一覧です。\n\n目次\n<@&613345307861844011>についてはページ1\n<@&613345394033819649>についてはページ2\n<@&613345488166715392>についてはページ3\n<@&613345547344150538>についてはページ4\n\n総クラスリーダー：<@475909877018132500>\n\n➡絵文字を押すと次のクラスへ"
+            ">>> **クラス一覧(ページ1)**\n\nクラス名：<@&613345307861844011>(ザクセン)\n特徴：PS向上\nクラスリーダー：<@329673969806475275>\n\n➡絵文字で次のクラス\n⬅絵文字で前の説明",
+            ">>> **クラス一覧(ページ2)**\n\nクラス名：<@&613345394033819649>(クリミア)\n特徴：エンジョイ\nクラスリーダー：<@602460316806152192>と<@539430524020719628>\n\n➡絵文字で次のクラス\n⬅絵文字で前のクラス",
+            ">>> **クラス一覧(ページ3)**\n\nクラス名：<@&613345488166715392>(ロズヴィエルト)\n特徴：初心者\nクラスリーダー：<@493093867973902357>\n\n➡絵文字で次のクラス\n⬅絵文字で前のクラス",
+            ">>> **クラス一覧(ページ4)**\n\nクラス名：<@&613345547344150538>(ノルデック)\n特徴：配信OK\nクラスリーダー：<@540121769454075904>\n\n⬅絵文字で前のクラス"] #ヘルプの各ページ内容
+        
+        send_message = await message.channel.send(page_content_list[0]) #最初のページ投稿
+        await send_message.add_reaction("➡")
+
+        def help_react_check(reaction,user):
+            '''
+            ヘルプに対する、ヘルプリクエスト者本人からのリアクションかをチェックする
+            '''
+            emoji = str(reaction.emoji)
+            if reaction.message.id != send_message.id:
+                return 0
+            if emoji == "➡" or emoji == "⬅":
+                if user != message.author:
+                    return 0
+                else:
+                    return 1
+
+        while not client.is_closed():
+            try:
+                reaction,user = await client.wait_for('reaction_add',check=help_react_check,timeout=60.0)
+            except asyncio.TimeoutError:
+                msg_end = '\n stop'
+                await send_message.edit(content=page_content_list[page_count] + msg_end)
+                return #時間制限が来たら、それ以降は処理しない
+            else:
+                emoji = str(reaction.emoji)
+                if emoji == "➡" and page_count < 2:
+                    page_count += 1
+                if emoji == "⬅" and page_count > 0:
+                    page_count -= 1
+
+                await send_message.clear_reactions() #事前に消去する
+                await send_message.edit(content=page_content_list[page_count])
+
+                if page_count == 0:
+                    await send_message.add_reaction("➡")
+                elif page_count == 1:
+                    await send_message.add_reaction("⬅")
+                    await send_message.add_reaction("➡")
+                elif page_count == 2:
+                    await send_message.add_reaction("⬅")
+                    await send_message.add_reaction("➡")
+                elif page_count == 3:
+                    await send_message.add_reaction("⬅")
+                    await send_message.add_reaction("➡")
+                elif page_count == 4:
+                    await send_message.add_reaction("⬅")
+                    #各ページごとに必要なリアクション
+
     if message.content == 'お知らせ': 
         if message.author.id == great_owner_id:
             await message.delete()
