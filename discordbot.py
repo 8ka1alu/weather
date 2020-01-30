@@ -429,8 +429,6 @@ async def on_message(message):
         # さいころの目の総和の内訳を表示する
         await message.channel.send(dice)
 
-      await message.channel.send(embed=embed)
-    
     if message.content == 'ステータスE':
         if message.author.guild_permissions.administrator:
             embed = discord.Embed(title="この鯖のステータス",description="Embed式")
