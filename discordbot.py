@@ -78,6 +78,8 @@ async def on_message(message):
         
     if message.content == 'ratk':
         await message.channel.send('..atk')
+    if message.content == 'rin':
+        await message.channel.send('..in')
     if message.author.id == ssr_tuti:
         await client.get_channel(ssr_ch).send('..i in')
     if message.content == 'rmycoin':
