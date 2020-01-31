@@ -29,10 +29,10 @@ lot_result_channel_id4 = 613346798383267841 #class-nordic
 master_owner_id = 459936557432963103 or 436078064292855818
 great_owner_id = 459936557432963103
 my_bot_id = 511397857887125539
-ssr_ch = 638239968140984330
-ssr_bot_ch = 638258742080700417
 ksi_ver = '6.0.1'
 discord_py_ver = '3.7.3'
+ssr_tuti = 636400089396543526
+ssr_ch = 638239968140984330
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -61,11 +61,7 @@ async def on_message(message):
         await asyncio.sleep(7200)
         channel = client.get_channel(CHANNEL_ID2)
         await channel.send(' 2時間たちました！') 
-
-    if 'です' in message.content:
-        if message.channel.id == ssr_bot_ch:
-            await client.get_channel(ssr_ch).send('..i in')
-
+ 
     if message.content.startswith("23"): 
         await message.channel.send('2時間たちました！') 
     
@@ -82,8 +78,8 @@ async def on_message(message):
         
     if message.content == 'ratk':
         await message.channel.send('..atk')
-    if message.content == 'rsanka':
-        await message.channel.send('..i in')
+    if message.author.id == ssr_tuti:
+        await client.get_channel(ssr_ch).send('..i in')
     if message.content == 'rmycoin':
         await message.channel.send('..mycoin')
     if message.content == 'rgatya':
