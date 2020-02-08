@@ -27,12 +27,17 @@ citycodes = {
 @client.event
 async def on_ready():
   print("logged in as " + client.user.name)
+  await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='創成の女神'))
+
 
 @client.event
 async def on_message(message):
+  if message.content == "対応都市":
+     await message.channel.send(citycodes)
+
   if message.author != client.user:
 
-    reg_res = re.compile(u"Bot君、(.+)の天気は？").search(message.content)
+    reg_res = re.compile(u"ノア、(.+)の天気は？").search(message.content)
     if reg_res:
 
       if reg_res.group(1) in citycodes.keys():
