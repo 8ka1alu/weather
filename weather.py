@@ -53,7 +53,7 @@ async def on_message(message):
         for f in resp['forecasts']:
           msg += f['dateLabel'] + "が" + f['telop'] + "\n"
         msg += "です。\n"
-        msg += resp['text']
+        msg += f['text']
 
         await message.channel.send(message.author.mention + msg)
 
