@@ -47,9 +47,9 @@ async def on_message(message):
           msg += f['dateLabel'] + "が" + f['telop'] + "\n"
         msg += "です。"
 
-        await client.send_message(message.channel, message.author.mention + msg)
+        await message.channel.send(message.author.mention + msg)
 
       else:
-        await client.send_message(message.channel, "そこの天気はわかりません...")
+        await message.channel.send("そこの天気はわかりません...")
 
 client.run(TOKEN)
