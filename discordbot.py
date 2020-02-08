@@ -1,69 +1,8 @@
 import discord 
 import os
-from discord.ext import tasks
-from datetime import datetime
-import random
-import re
-import asyncio
-import sys
-from func import diceroll
-import traceback 
 
-#トークン
-TOKEN = os.environ['DISCORD_BOT_TOKEN']
 
-#チャンネルID
-CHANNEL_ID = 613341065365291010  #top
-CHANNEL_ID2 = 613346606347190274 #testlog
-CHANNEL_ID3 = 624496341124513793 #omikuji
-CHANNEL_ID4 = 613346909154836517 #ID取得
-CHANNEL_ID5 = 613343508153106443
-CHANNEL_IDother = 661705202424086547
-
-lot_channel_id = 643070878652825601 #ここにコマンドを送るチャンネルID
-lot_result_channel_id1 = 613346390092939275 #class-saxony
-lot_result_channel_id2 = 613346614085419040 #class-crimean
-lot_result_channel_id3 = 613346718624251944 #class-rusviet
-lot_result_channel_id4 = 613346798383267841 #class-nordic
-
-master_owner_id = 459936557432963103 or 436078064292855818
-great_owner_id = 459936557432963103
-my_bot_id = 511397857887125539
-ksi_ver = '6.0.1'
-discord_py_ver = '3.7.3'
-ssr_tuti = 636400089396543526
-ssr_ch = 638239968140984330
-
-# 接続に必要なオブジェクトを生成
-client = discord.Client()
-
-#起動メッセージ
-@client.event
-async def on_ready():
-    print(client.user.name)  # ボットの名前
-    print(client.user.id)  # ボットのID
-    print(discord.__version__)  # discord.pyのバージョン
-    print('----------------')
-    print('Hello World,リマインドbotプログラム「project-RRN」、起動しました')
-    channel = client.get_channel(CHANNEL_ID2)
-    await channel.purge()
-    await channel.send(f'名前:{client.user.name}')  # ボットの名前
-    await channel.send(f'ID:{client.user.id}')  # ボットのID
-    await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
-    await channel.send('----------------')
-    await channel.send('状態：BOT再起動しました。')   
-    await client.change_presence(status=discord.Status.idle,activity=discord.Game(name='ギルド専属ナビ'))
-
-@client.event
-async def on_message(message):
-    """メッセージを処理"""
-    if message.content.startswith("BOT再起動"): #から始まるメッセージ 
-        await asyncio.sleep(7200)
-        channel = client.get_channel(CHANNEL_ID2)
-        await channel.send(' 2時間たちました！') 
- 
-    if message.content.startswith("23"): 
-        await message.channel.send('2時間たちました！') 
+.send('2時間たちました！') 
     
 #おみくじ
     if message.content == "おみくじ":
