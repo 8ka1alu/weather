@@ -24,6 +24,8 @@ citycodes = {
     "那覇": '471010'
 }
 
+taio = "札幌、仙台、土浦、水戸、東京、横浜、名古屋、大阪、広島、福岡、鹿児島、那覇"
+
 @client.event
 async def on_ready():
   print("logged in as " + client.user.name)
@@ -33,7 +35,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
   if message.content == "対応都市":
-     await message.channel.send(citycodes)
+     await message.channel.send(taio)
 
   if message.author != client.user:
 
