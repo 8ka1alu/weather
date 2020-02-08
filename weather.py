@@ -51,7 +51,7 @@ async def on_message(message):
         msg = resp['location']['city']
         msg += "の天気は、\n"
         for f in resp['forecasts']:
-          msg += f['dateLabel'] + "が" + f['telop'] + "\n"
+          msg += f['dateLabel'] + "が" + f['telop'] + "(" +  f['date'] + ")\n"
         msg += "です。\n\n```"
         msg += resp['description']['text'] + "```"
 
