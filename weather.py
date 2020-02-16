@@ -1,6 +1,4 @@
-import sys
 import discord
-from googlesearch import search
 import urllib.request
 import json
 import re
@@ -38,56 +36,29 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+  if message.content == '対応都市':
+    await client.send_message(taio)
 
-    # イベント入るたびに初期化はまずいのでグローバル変数で
-    global ModeFlag
-    # botの発言は無視する(無限ループ回避)
-    if message.author.bot:
-        return
-    # 一応終了するコマンドも用意しておく
-    if message.content == '!exit':
-        await message.channel.send('ﾉｼ')
-        sys.exit()
-    # google検索モード(次に何か入力されるとそれを検索)
-    if ModeFlag == 1:
-        kensaku = message.content
-        ModeFlag = 0
-        count = 0
-        # 日本語で検索した上位5件を順番に表示
-        for url in search(kensaku, lang="jp",num = 5):
-            await message.channel.send(url)
-            count += 1
-            if(count == 5):
-               break
-    # google検索モードへの切り替え
-    if message.content == '!google':
-        ModeFlag = 1
-        await message.channel.send('検索するワードをチャットで発言してね')
+  if message.author != client.user:
 
-    if message.content == "対応都市":
-        await message.channel.send(taio)
+    reg_res = re.compile(u"Bot君、(.+)の天気は？").search(message.content)
+    if reg_res:
 
-    if message.author != client.user:
+      if reg_res.group(1) in citycodes.keys():
 
-        reg_res = re.compile(u"ノア、(.+)の天気は？").search(message.content)
-        if reg_res:
+        citycode = citycodes[reg_res.group(1)]
+        resp = urllib.request.urlopen('http://weather.livedoor.com/forecast/webservice/json/v1?city=%s'%citycode).read()
+        resp = json.loads(resp.decode('utf-8'))
 
-        if reg_res.group(1) in citycodes.keys():
+        msg = resp['location']['city']
+        msg += "の天気は、\n"
+        for f in resp['forecasts']:
+          msg += f['dateLabel'] + "が" + f['telop'] + "\n"
+        msg += "です。"
 
-            citycode = citycodes[reg_res.group(1)]
-            resp = urllib.request.urlopen('http://weather.livedoor.com/forecast/webservice/json/v1?city=%s'%citycode).read()
-            resp = json.loads(resp.decode('utf-8'))
- 
-            msg = resp['location']['city']
-            msg += "の天気は、\n"
-            for f in resp['forecasts']:
-                msg += f['dateLabel'] + "が" + f['telop'] + "(" +  f['date'] + ")\n"
-            msg += "です。\n\n```"
-            msg += resp['description']['text'] + "```"
+        await client.send_message(message.channel, message.author.mention + msg)
 
-            await message.channel.send(message.author.mention + msg)
-
-        else:
-            await message.channel.send("そこの天気はわかりません...")
+      else:
+        await client.send_message(message.channel, "そこの天気はわかりません...")
 
 client.run(TOKEN)
