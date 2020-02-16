@@ -41,7 +41,7 @@ async def on_message(message):
 
   if message.author != client.user:
 
-    reg_res = re.compile(u"Bot君、(.+)の天気は？").search(message.content)
+    reg_res = re.compile(u"ノア、(.+)の天気は？").search(message.content)
     if reg_res:
 
       if reg_res.group(1) in citycodes.keys():
@@ -55,6 +55,7 @@ async def on_message(message):
         for f in resp['forecasts']:
           msg += f['dateLabel'] + "が" + f['telop'] + "\n"
         msg += "です。"
+        msg += resp['description']['text']
 
         await message.channel.send(message.author.mention + msg)
 
