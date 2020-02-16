@@ -54,8 +54,9 @@ async def on_message(message):
         msg += "の天気は、\n"
         for f in resp['forecasts']:
           msg += f['dateLabel'] + "が" + f['telop'] + "\n"
-        msg += "です。"
+        msg += "です。\n```"
         msg += resp['description']['text']
+        msg += "```"
 
         await message.channel.send(message.author.mention + msg)
 
