@@ -64,30 +64,30 @@ async def on_message(message):
         ModeFlag = 1
         await message.channel.send('検索するワードをチャットで発言してね')
 
-  if message.content == "対応都市":
-    await message.channel.send(taio)
+    if message.content == "対応都市":
+        await message.channel.send(taio)
 
-  if message.author != client.user:
+    if message.author != client.user:
 
-    reg_res = re.compile(u"ノア、(.+)の天気は？").search(message.content)
-    if reg_res:
+        reg_res = re.compile(u"ノア、(.+)の天気は？").search(message.content)
+        if reg_res:
 
-      if reg_res.group(1) in citycodes.keys():
+        if reg_res.group(1) in citycodes.keys():
 
-        citycode = citycodes[reg_res.group(1)]
-        resp = urllib.request.urlopen('http://weather.livedoor.com/forecast/webservice/json/v1?city=%s'%citycode).read()
-        resp = json.loads(resp.decode('utf-8'))
+            citycode = citycodes[reg_res.group(1)]
+            resp = urllib.request.urlopen('http://weather.livedoor.com/forecast/webservice/json/v1?city=%s'%citycode).read()
+            resp = json.loads(resp.decode('utf-8'))
+ 
+            msg = resp['location']['city']
+            msg += "の天気は、\n"
+            for f in resp['forecasts']:
+                msg += f['dateLabel'] + "が" + f['telop'] + "(" +  f['date'] + ")\n"
+            msg += "です。\n\n```"
+            msg += resp['description']['text'] + "```"
 
-        msg = resp['location']['city']
-        msg += "の天気は、\n"
-        for f in resp['forecasts']:
-          msg += f['dateLabel'] + "が" + f['telop'] + "(" +  f['date'] + ")\n"
-        msg += "です。\n\n```"
-        msg += resp['description']['text'] + "```"
+            await message.channel.send(message.author.mention + msg)
 
-        await message.channel.send(message.author.mention + msg)
-
-      else:
-        await message.channel.send("そこの天気はわかりません...")
+        else:
+            await message.channel.send("そこの天気はわかりません...")
 
 client.run(TOKEN)
